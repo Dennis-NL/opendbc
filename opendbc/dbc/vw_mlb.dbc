@@ -619,15 +619,20 @@ BO_ 1089 Getriebe_04: 8 Getriebe_AL551_951_D4_C7
  SG_ GE_amax_moeglich : 42|9@1+ (0.024,-2.016) [-2.016|10.224] "Unit_MeterPerSeconSquar"  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ GE_Sumpftemperatur : 56|8@1+ (1,-58) [-58|196] "Unit_DegreCelsi"  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
 
-BO_ 980 PLA_1: 8 XXX
- SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] "" XXX
- SG_ COUNTER : 8|4@1+ (1,0) [0|15] "" XXX
- SG_ PL1_Status_EPS : 12|4@1+ (1,0) [0|15] "" XXX
- SG_ PL1_ArcAngleReq : 16|15@1+ (0.04375,0) [0|1433.55625] "Unit_DegreeOfArc" XXX
- SG_ PL1_AngleReqSign : 31|1@1+ (1,0) [0|1] "" XXX
- SG_ PL1_Stat_PLA_ESP : 32|4@1+ (1,0) [0|10] "" Vector__XXX
- SG_ PL1_Bremsmoment : 40|13@1+ (4,0) [0|32760] "Unit_NewtoMeter" Vector__XXX
- SG_ PL1_void : 53|11@1+ (1,0) [0|2047] "" XXX
+BO_ 304 PLA_01: 8 XXX
+ SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  XXX
+ SG_ COUNTER : 8|4@1+ (1,0) [0|15] ""  XXX
+ SG_ PLA_Status_PLA_ESP : 12|4@1+ (1.0,0.0) [0.0|15] ""  XXX
+ SG_ PLA_LW_Soll : 16|13@1+ (0.1,0) [0.0|819.1] "Unit_DegreOfArc"  XXX
+ SG_ PLA_VZ_LW_Soll : 31|1@1+ (1.0,0.0) [0.0|1] ""  XXX
+ SG_ PLA_Status_PLA_EPS : 32|4@1+ (1.0,0.0) [0.0|15] ""  XXX
+ SG_ PLA_Bremsmoment : 36|13@1+ (4,0) [0|32760] "Unit_NewtoMeter"  XXX
+ SG_ PLA_Bremsverzoegerung : 36|7@1+ (0.1,0) [0.0|12.0] "Unit_MeterPerSeconSquar"  XXX
+ SG_ PLA_Anf_Bremsverzoegerung : 43|1@1+ (1.0,0.0) [0.0|1] ""  XXX
+ SG_ PLA_BremsMom_Verzoeg : 50|1@1+ (1.0,0.0) [0.0|1] ""  XXX
+ SG_ PLA_Anhalten : 51|1@1+ (1.0,0.0) [0.0|1] ""  XXX
+ SG_ PLA_Anhalteweg : 52|11@1+ (0.01,0) [0.01|20.45] "Unit_Meter"  XXX
+ SG_ PLA_01_Signal_red_cyclic : 63|1@1+ (1.0,0.0) [0.0|1] ""  XXX
 
 BO_ 294 HCA_01: 8 Frontsensorik
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] "" Vector__XXX
