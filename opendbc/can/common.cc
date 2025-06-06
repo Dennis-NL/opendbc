@@ -198,7 +198,7 @@ unsigned int xor_checksum(uint32_t address, const Signal &sig, const std::vector
   int checksum_byte = sig.start_bit / 8;
 
   switch(address){
-    case 0x3D4: // mPLA_1, TX from OP
+    case 0x130: // mPLA_1, TX from OP
       for (int i = 0; i < 4; i++) {
         if (i != checksum_byte) {
           checksum ^= d[i];
