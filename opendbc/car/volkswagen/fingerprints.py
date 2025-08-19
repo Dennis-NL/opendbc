@@ -964,6 +964,24 @@ FW_VERSIONS = {
       b'\xf1\x872Q0907572T \xf1\x890383',
     ],
   },
+  CAR.AUDI_Q5_MK1: {
+    (Ecu.engine, 0x7e0, None): [
+      b'\xf1\x878R0907115N \xf1\x890006',
+    ],
+    (Ecu.transmission, 0x7e1, None): [
+      b'\xf1\x878R0927158D \xf1\x891010',
+    ],
+    # FIXME: placeholder
+    (Ecu.srs, 0x715, None): [
+      b'PLACEHOLDER',
+    ],
+    (Ecu.eps, 0x712, None): [
+      b'\xf1\x878R0909144R \xf1\x890511\xf1\x82\x01\n\x1a',
+    ],
+    (Ecu.fwdRadar, 0x757, None): [
+      b'\xf1\x878R0907561A\x00\xf1\x890410\xf1\x80100',
+    ],
+  },
   CAR.SEAT_ATECA_MK1: {
     (Ecu.engine, 0x7e0, None): [
       b'\xf1\x8704E906027KA\xf1\x893749',
