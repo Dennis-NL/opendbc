@@ -4,18 +4,21 @@
 // Transmit of LS_01 is allowed on bus 0 and 2 to keep compatibility with gateway and camera integration
 static const CanMsg VOLKSWAGEN_MLB_STOCK_TX_MSGS[] = {
   {MSG_HCA_01, 0, 8, .check_relay = true},
-  {MSG_LS_01, 0, 4, .check_relay = false},
-  {MSG_LS_01, 2, 4, .check_relay = false},
+  {MSG_LS_01,  0, 4, .check_relay = false},
+  {MSG_LS_01,  2, 4, .check_relay = false},
   {MSG_LDW_02, 0, 8, .check_relay = true},
   {MSG_ACC_02, 0, 8, .check_relay = true},
 };
 
+// 0.9.10: frequentie is 4e positionele arg; checksum/counter flags via ignore_*.
+// Waar je eerder check_checksum=false had, zetten we .ignore_checksum=true.
+// Waar je check_checksum=true had, laten we de checksum-check gewoon aan (geen ignore_*).
 static RxCheck volkswagen_mlb_rx_checks[] = {
-  {.msg = {{MSG_ESP_03, 0, 8, .check_checksum = false, .max_counter = 15U, .frequency = 50U}, { 0 }, { 0 }}},
-  {.msg = {{MSG_LH_EPS_03, 0, 8, .check_checksum = true,  .max_counter = 15U, .frequency = 100U}, { 0 }, { 0 }}},
-  {.msg = {{MSG_ESP_05, 0, 8, .check_checksum = false, .max_counter = 15U, .frequency = 50U}, { 0 }, { 0 }}},
-  {.msg = {{MSG_TSK_02, 0, 8, .check_checksum = false, .max_counter = 15U, .frequency = 33U}, { 0 }, { 0 }}},
-  {.msg = {{MSG_MOTOR_03, 0, 8, .check_checksum = false, .max_counter = 15U, .frequency = 100U}, { 0 }, { 0 }}},
+  {.msg = {{MSG_ESP_03,   0, 8, 50U,  .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_LH_EPS_03,0, 8, 100U, .max_counter = 15U                          }, { 0 }, { 0 }}},
+  {.msg = {{MSG_ESP_05,   0, 8, 50U,  .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_TSK_02,   0, 8, 33U,  .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_MOTOR_03, 0, 8, 100U, .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
 };
 
 static safety_config volkswagen_mlb_init(uint16_t param) {
@@ -78,7 +81,7 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
   bool tx = true;
 
   if (addr == MSG_HCA_01) {
-    // Lateral limits (inline, 0.9.10-stijl)
+    // 0.9.10: inline TorqueSteeringLimits (zoals MQB)
     const TorqueSteeringLimits VOLKSWAGEN_MLB_STEERING_LIMITS = {
       .max_torque = 300,
       .max_rt_delta = 188,
@@ -109,7 +112,7 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
   return tx;
 }
 
-// Optioneel behouden voor toekomstig gebruik; niet registreren in hooks-struct
+// Optioneel behouden; niet registreren in hooks-struct (0.9.10 MQB registreert .fwd niet)
 static int volkswagen_mlb_fwd_hook(int bus_num, int addr) {
   int bus_fwd = -1;
 
