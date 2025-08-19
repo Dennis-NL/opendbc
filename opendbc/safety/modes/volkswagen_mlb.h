@@ -3,11 +3,11 @@
 
 // Transmit of LS_01 is allowed on bus 0 and 2 to keep compatibility with gateway and camera integration
 static const CanMsg VOLKSWAGEN_MLB_STOCK_TX_MSGS[] = {
-  {MSG_HCA_01, 0, 8},
-  {MSG_LS_01, 0, 4},
-  {MSG_LS_01, 2, 4},
-  {MSG_LDW_02, 0, 8},
-  {MSG_ACC_02, 0, 8},
+  {MSG_HCA_01, 0, 8, .check_relay = true},
+  {MSG_LS_01, 0, 4, .check_relay = false},
+  {MSG_LS_01, 2, 4, .check_relay = false},
+  {MSG_LDW_02, 0, 8, .check_relay = true},
+  {MSG_ACC_02, 0, 8, .check_relay = true},
 };
 
 static RxCheck volkswagen_mlb_rx_checks[] = {
