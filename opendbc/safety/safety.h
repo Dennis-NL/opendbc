@@ -417,6 +417,7 @@ int set_safety_hooks(uint16_t mode, uint16_t param) {
 #ifdef ALLOW_DEBUG
     {SAFETY_SUBARU_PREGLOBAL, &subaru_preglobal_hooks},
     {SAFETY_VOLKSWAGEN_PQ, &volkswagen_pq_hooks},
+    {SAFETY_VOLKSWAGEN_MLB, &volkswagen_mlb_hooks},
     {SAFETY_ALLOUTPUT, &alloutput_hooks},
 #endif
   };
