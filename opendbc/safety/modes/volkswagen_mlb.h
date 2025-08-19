@@ -109,21 +109,6 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *msg) {
   return tx;
 }
 
-// Optioneel laten staan; niet registreren in hooks-struct
-static int volkswagen_mlb_fwd_hook(int bus_num, int addr) {
-  int bus_fwd = -1;
-  switch (bus_num) {
-    case 0: bus_fwd = 2; break;
-    case 2:
-      if ((addr == MSG_HCA_01) || (addr == MSG_LDW_02)) bus_fwd = -1;
-      else if (volkswagen_longitudinal && ((addr == MSG_ACC_02) || (addr == MSG_ACC_06) || (addr == MSG_ACC_07))) bus_fwd = -1;
-      else bus_fwd = 0;
-      break;
-    default: bus_fwd = -1; break;
-  }
-  return bus_fwd;
-}
-
 const safety_hooks volkswagen_mlb_hooks = {
   .init = volkswagen_mlb_init,
   .rx = volkswagen_mlb_rx_hook,
