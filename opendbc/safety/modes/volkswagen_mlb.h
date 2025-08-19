@@ -1,19 +1,5 @@
-#pragma once
-
 #include "opendbc/safety/safety_declarations.h"
 #include "opendbc/safety/modes/volkswagen_common.h"
-
-// lateral limits
-static const SteeringLimits VOLKSWAGEN_MLB_STEERING_LIMITS = {
-  .max_steer = 300,
-  .max_rt_delta = 188,
-  .max_rt_interval = 250000,
-  .max_rate_up = 10,
-  .max_rate_down = 10,
-  .driver_torque_allowance = 60,
-  .driver_torque_factor = 3,
-  .type = TorqueDriverLimited,
-};
 
 // Transmit of LS_01 is allowed on bus 0 and 2 to keep compatibility with gateway and camera integration
 static const CanMsg VOLKSWAGEN_MLB_STOCK_TX_MSGS[] = {
@@ -92,6 +78,17 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
   bool tx = true;
 
   if (addr == MSG_HCA_01) {
+    // Lateral limits (inline, 0.9.10-stijl)
+    const TorqueSteeringLimits VOLKSWAGEN_MLB_STEERING_LIMITS = {
+      .max_torque = 300,
+      .max_rt_delta = 188,
+      .max_rate_up = 10,
+      .max_rate_down = 10,
+      .driver_torque_allowance = 60,
+      .driver_torque_multiplier = 3,
+      .type = TorqueDriverLimited,
+    };
+
     int desired_torque = GET_BYTE(to_send, 2) | ((GET_BYTE(to_send, 3) & 0x3FU) << 8);
     int sign = (GET_BYTE(to_send, 3) & 0x80U) >> 7;
     if (sign) {
@@ -112,6 +109,7 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
   return tx;
 }
 
+// Optioneel behouden voor toekomstig gebruik; niet registreren in hooks-struct
 static int volkswagen_mlb_fwd_hook(int bus_num, int addr) {
   int bus_fwd = -1;
 
