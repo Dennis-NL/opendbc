@@ -1,3 +1,5 @@
+#pragma once
+
 #include "opendbc/safety/safety_declarations.h"
 #include "opendbc/safety/modes/volkswagen_common.h"
 
@@ -10,15 +12,12 @@ static const CanMsg VOLKSWAGEN_MLB_STOCK_TX_MSGS[] = {
   {MSG_ACC_02, 0, 8, .check_relay = true},
 };
 
-// 0.9.10: frequentie is 4e positionele arg; checksum/counter flags via ignore_*.
-// Waar je eerder check_checksum=false had, zetten we .ignore_checksum=true.
-// Waar je check_checksum=true had, laten we de checksum-check gewoon aan (geen ignore_*).
 static RxCheck volkswagen_mlb_rx_checks[] = {
-  {.msg = {{MSG_ESP_03,   0, 8, 50U,  .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
-  {.msg = {{MSG_LH_EPS_03,0, 8, 100U, .max_counter = 15U                          }, { 0 }, { 0 }}},
-  {.msg = {{MSG_ESP_05,   0, 8, 50U,  .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
-  {.msg = {{MSG_TSK_02,   0, 8, 33U,  .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
-  {.msg = {{MSG_MOTOR_03, 0, 8, 100U, .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_ESP_03,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_LH_EPS_03, 0, 8, 100U, .max_counter = 15U                          }, { 0 }, { 0 }}},
+  {.msg = {{MSG_ESP_05,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_TSK_02,    0, 8,  33U, .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
+  {.msg = {{MSG_MOTOR_03,  0, 8, 100U, .max_counter = 15U, .ignore_checksum = true}, { 0 }, { 0 }}},
 };
 
 static safety_config volkswagen_mlb_init(uint16_t param) {
@@ -31,53 +30,53 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
   return BUILD_SAFETY_CFG(volkswagen_mlb_rx_checks, VOLKSWAGEN_MLB_STOCK_TX_MSGS);
 }
 
-static void volkswagen_mlb_rx_hook(const CANPacket_t *to_push) {
-  if (GET_BUS(to_push) != 0U) return;
+static void volkswagen_mlb_rx_hook(const CANPacket_t *msg) {
+  if (msg->bus != 0U) return;
 
-  int addr = GET_ADDR(to_push);
+  int addr = msg->addr;
 
   if (addr == MSG_ESP_03) {
-    uint32_t speed = 0;
-    speed += ((GET_BYTE(to_push, 3) & 0xFU) << 8) | GET_BYTE(to_push, 2);  // FL
-    speed += (GET_BYTE(to_push, 4) << 4) | (GET_BYTE(to_push, 3) >> 4);    // FR
-    speed += ((GET_BYTE(to_push, 6) & 0xFU) << 8) | GET_BYTE(to_push, 5);  // RL
-    speed += (GET_BYTE(to_push, 7) << 4) | (GET_BYTE(to_push, 6) >> 4);    // RR
-    vehicle_moving = speed > 0U;
+    uint32_t speed = 0U;
+    speed += ((msg->data[3] & 0x0FU) << 8) | msg->data[2];   // FL
+    speed += (msg->data[4] << 4) | (msg->data[3] >> 4);      // FR
+    speed += ((msg->data[6] & 0x0FU) << 8) | msg->data[5];   // RL
+    speed += (msg->data[7] << 4) | (msg->data[6] >> 4);      // RR
+    vehicle_moving = (speed > 0U);
   }
 
   if (addr == MSG_LH_EPS_03) {
-    update_sample(&torque_driver, volkswagen_mlb_mqb_driver_input_torque(to_push));
+    update_sample(&torque_driver, volkswagen_mlb_mqb_driver_input_torque(msg));
   }
 
   if (addr == MSG_TSK_02) {
-    int acc_status = (GET_BYTE(to_push, 2) & 0x3U);
+    int acc_status = (msg->data[2] & 0x3U);
     bool cruise_engaged = (acc_status == 1) || (acc_status == 2);
     acc_main_on = cruise_engaged || (acc_status == 0);
     pcm_cruise_check(cruise_engaged);
   }
 
   if (addr == MSG_LS_01) {
-    if (GET_BIT(to_push, 13U) == 1U) {
+    if (GET_BIT(msg, 13U)) {
       controls_allowed = false;
     }
   }
 
   if (addr == MSG_MOTOR_03) {
-    gas_pressed = GET_BYTE(to_push, 6) != 0U;
-    volkswagen_brake_pedal_switch = GET_BIT(to_push, 35U);
+    gas_pressed = (msg->data[6] != 0U);
+    volkswagen_brake_pedal_switch = GET_BIT(msg, 35U);
   }
 
   if (addr == MSG_ESP_05) {
-    volkswagen_brake_pressure_detected = volkswagen_mlb_mqb_brake_pressure_threshold(to_push);
+    volkswagen_brake_pressure_detected = volkswagen_mlb_mqb_brake_pressure_threshold(msg);
   }
 
   brake_pressed = volkswagen_brake_pedal_switch || volkswagen_brake_pressure_detected;
 
-  generic_rx_checks((addr == MSG_HCA_01));
+  generic_rx_checks(addr == MSG_HCA_01);
 }
 
-static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
-  int addr = GET_ADDR(to_send);
+static bool volkswagen_mlb_tx_hook(const CANPacket_t *msg) {
+  int addr = msg->addr;
   bool tx = true;
 
   if (addr == MSG_HCA_01) {
@@ -92,8 +91,8 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
       .type = TorqueDriverLimited,
     };
 
-    int desired_torque = GET_BYTE(to_send, 2) | ((GET_BYTE(to_send, 3) & 0x3FU) << 8);
-    int sign = (GET_BYTE(to_send, 3) & 0x80U) >> 7;
+    int desired_torque = msg->data[2] | ((msg->data[3] & 0x3FU) << 8);
+    int sign = (msg->data[3] & 0x80U) >> 7;
     if (sign) {
       desired_torque *= -1;
     }
@@ -104,7 +103,7 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
   }
 
   if ((addr == MSG_LS_01) && !controls_allowed) {
-    if (GET_BIT(to_send, 16U) || GET_BIT(to_send, 19U)) {
+    if (GET_BIT(msg, 16U) || GET_BIT(msg, 19U)) {
       tx = false;
     }
   }
@@ -112,7 +111,7 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *to_send) {
   return tx;
 }
 
-// Optioneel behouden; niet registreren in hooks-struct (0.9.10 MQB registreert .fwd niet)
+// Optioneel behouden; niet registreren in hooks-struct (MQB 0.9.10 registreert .fwd niet)
 static int volkswagen_mlb_fwd_hook(int bus_num, int addr) {
   int bus_fwd = -1;
 
