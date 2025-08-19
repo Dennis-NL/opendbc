@@ -197,7 +197,8 @@ class VolkswagenFlags(IntFlag):
 
 @dataclass
 class VolkswagenMLBPlatformConfig(PlatformConfig):
-  dbc_dict: DbcDict = field(default_factory=lambda: dbc_dict('vw_mlb', None))
+  # 0.9.10-stijl: direct een mapping Bus -> DBC-key
+  dbc_dict: DbcDict = field(default_factory=lambda: {Bus.pt: 'vw_mlb'})
   chassis_codes: set[str] = field(default_factory=set)
   wmis: set[WMI] = field(default_factory=set)
 
