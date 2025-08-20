@@ -6,7 +6,6 @@
 static safety_config volkswagen_mlb_init(uint16_t param) {
   UNUSED(param);
 
-  // TX: LS_01 ook op bus 2 ivm gateway/camera
   static const CanMsg VOLKSWAGEN_MLB_STOCK_TX_MSGS[] = {
     {MSG_HCA_01, 0, 8, .check_relay = true},
     {MSG_LS_01,  0, 4, .check_relay = false},
@@ -15,15 +14,22 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
     {MSG_ACC_02, 0, 8, .check_relay = true},
   };
 
-  // RX: 0.9.10 API: freq als 4e arg, ignore_* flags
   static RxCheck volkswagen_mlb_rx_checks[] = {
-    {.msg = {{MSG_ESP_03,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true,  .ignore_quality_flag = true}, { 0 }, { 0 }}},
-    {.msg = {{MSG_LH_EPS_03, 0, 8, 100U, .max_counter = 15U,                           .ignore_quality_flag = true}, { 0 }, { 0 }}},
-    {.msg = {{MSG_ESP_05,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true,  .ignore_quality_flag = true}, { 0 }, { 0 }}},
-    {.msg = {{MSG_TSK_02,    0, 8,  33U, .max_counter = 15U, .ignore_checksum = true,  .ignore_quality_flag = true}, { 0 }, { 0 }}},
-    {.msg = {{MSG_MOTOR_03,  0, 8, 100U, .max_counter = 15U, .ignore_checksum = true,  .ignore_quality_flag = true}, { 0 }, { 0 }}},
-    // Sommige MLB’s gebruiken TSK_06 ipv TSK_02
-    {.msg = {{MSG_TSK_06,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true,  .ignore_quality_flag = true}, { 0 }, { 0 }}},
+    {.msg = {{MSG_ESP_03,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
+             {MSG_ESP_03,    2, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}, { 0 }}},
+
+    {.msg = {{MSG_LH_EPS_03, 0, 8, 100U, .max_counter = 15U,                          .ignore_quality_flag = true},
+             {MSG_LH_EPS_03, 2, 8, 100U, .max_counter = 15U,                          .ignore_quality_flag = true}, { 0 }}},
+
+    {.msg = {{MSG_ESP_05,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
+             {MSG_ESP_05,    2, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}, { 0 }}},
+
+    {.msg = {{MSG_TSK_02,    0, 8,  33U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
+             {MSG_TSK_02,    2, 8,  33U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
+             {MSG_TSK_06,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}}},
+
+    {.msg = {{MSG_MOTOR_03,  0, 8, 100U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
+             {MSG_MOTOR_03,  2, 8, 100U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}, { 0 }}},
   };
 
   volkswagen_brake_pedal_switch = false;
@@ -34,7 +40,7 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
 }
 
 static void volkswagen_mlb_rx_hook(const CANPacket_t *msg) {
-  if (msg->bus != 0U) return;
+  if ((msg->bus != 0U) && (msg->bus != 2U)) return;
 
   const int addr = msg->addr;
 
