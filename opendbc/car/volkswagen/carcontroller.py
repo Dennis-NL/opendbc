@@ -110,7 +110,7 @@ class CarController(CarControllerBase):
 
       can_sends.append(self.CCS.create_steering_control(self.packer_pt, self.CAN.pt, apply_torque, hca_enabled))
 
-      if self.CP.flags & VolkswagenFlags.STOCK_HCA_PRESENT:
+      if (self.CP.flags & VolkswagenFlags.STOCK_HCA_PRESENT) and not (self.CP.flags & VolkswagenFlags.MLB):
         # Emergency Assist pacifier (2x OP torque of echte driver torque)
         ea_simulated_torque = float(np.clip(apply_torque * 2, -self.CCP.STEER_MAX, self.CCP.STEER_MAX))
         if abs(CS.out.steeringTorque) > abs(ea_simulated_torque):
