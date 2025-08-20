@@ -14,19 +14,13 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
     {MSG_ACC_02, 0, 8, .check_relay = true},
   };
 
+  // Minimal, robuuste gating: MLB basisframes op bus 0 ÓF 2
   static RxCheck volkswagen_mlb_rx_checks[] = {
     {.msg = {{MSG_ESP_03,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
              {MSG_ESP_03,    2, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}, { 0 }}},
 
-    {.msg = {{MSG_LH_EPS_03, 0, 8, 100U, .max_counter = 15U,                          .ignore_quality_flag = true},
-             {MSG_LH_EPS_03, 2, 8, 100U, .max_counter = 15U,                          .ignore_quality_flag = true}, { 0 }}},
-
     {.msg = {{MSG_ESP_05,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
              {MSG_ESP_05,    2, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}, { 0 }}},
-
-    {.msg = {{MSG_TSK_02,    0, 8,  33U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
-             {MSG_TSK_02,    2, 8,  33U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
-             {MSG_TSK_06,    0, 8,  50U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}}},
 
     {.msg = {{MSG_MOTOR_03,  0, 8, 100U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true},
              {MSG_MOTOR_03,  2, 8, 100U, .max_counter = 15U, .ignore_checksum = true, .ignore_quality_flag = true}, { 0 }}},
