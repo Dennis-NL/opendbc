@@ -439,10 +439,10 @@ class CAR(Platforms):
     wmis={WMI.AUDI_EUROPE_MPV, WMI.AUDI_GERMANY_CAR},
   )
   AUDI_Q5_MK1 = VolkswagenMLBPlatformConfig(
-    [VWCarDocs("Audi Q5 2014")],
+    [VWCarDocs("Audi Q5 2008 - 2017")],
     VolkswagenCarSpecs(mass=1850, wheelbase=2.81),
     chassis_codes={"8R"},
-    wmis={WMI.AUDI_EUROPE_MPV},
+    wmis={WMI.AUDI_EUROPE_MPV, WMI.AUDI_GERMANY_CAR},
   )
   SEAT_ATECA_MK1 = VolkswagenMQBPlatformConfig(
     [
