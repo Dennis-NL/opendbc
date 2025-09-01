@@ -106,6 +106,24 @@
     ],
     "package": "Adaptive Cruise Control (ACC) & Lane Assist"
   },
+  "Audi Q5 2008-2017": {
+    "platform": "AUDI_Q5_MK1",
+    "make": "Audi",
+    "brand": "volkswagen",
+    "model": "Q5",
+    "year": [
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2014",
+      "2015",
+      "2016",
+      "2017"
+    ],
+    "package": "Adaptive Cruise Control (ACC) & Lane Assist"
+  },
   "Audi RS3 2018": {
     "platform": "AUDI_A3_MK3",
     "make": "Audi",
