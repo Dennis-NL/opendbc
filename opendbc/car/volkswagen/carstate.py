@@ -341,7 +341,7 @@ class CarState(CarStateBase):
         ("Blinkmodi_01", math.nan),
       ], CanBus(CP).pt),
       Bus.cam: CANParser(DBC[CP.carFingerprint][Bus.pt], [
-        ("ACC_02", 17), # 16.67Hz
+        ("ACC_02", 0), # 0 - 16.67Hz
       ], CanBus(CP).cam),
     }
 
