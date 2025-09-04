@@ -901,9 +901,9 @@ class PandaSafetyTest(PandaSafetyTestBase):
                           'TestHyundaiLongitudinalESCCSafety'}
             if any(attr.startswith(test) for test in base_tests) and any(current_test.startswith(test) for test in base_tests):
               continue
-
+############
             if {attr, current_test}.issubset({'TestVolkswagenMqbSafety', 'TestVolkswagenMqbStockSafety', 'TestVolkswagenMqbLongSafety',
-                                              'TestVolkswagenMlbStockSafety'}):
+                                              'TestVolkswagenMlbStockSafety', 'TestVolkswagenMlbLongSafety'}):
 
             # overlapping TX addrs, but they're not actuating messages for either car
             if attr == 'TestHyundaiCanfdLKASteeringLongEV' and current_test.startswith('TestToyota'):
@@ -919,6 +919,17 @@ class PandaSafetyTest(PandaSafetyTestBase):
 
             # Volkswagen MQB and Honda Bosch Radarless ACC HUD messages overlap
             if attr == 'TestVolkswagenMqbLongSafety' and current_test.startswith('TestHondaBoschRadarless'):
+              tx = list(filter(lambda m: m[0] not in [0x30c, ], tx))
+
+            # Volkswagen MLB longitudinal actuating message overlaps with Subaru
+            if attr == 'TestVolkswagenMlbLongSafety' and current_test.startswith('TestSubaru'):
+              tx = list(filter(lambda m: m[0] not in [0x10d, ], tx))
+
+            # Volkswagen MLB and Honda ACC HUD messages overlap
+            if attr == 'TestVolkswagenMlbLongSafety' and current_test.startswith('TestHondaNidec'):
+              tx = list(filter(lambda m: m[0] not in [0x30c, ], tx))
+
+            if attr == 'TestVolkswagenMlbLongSafety' and current_test.startswith('TestHondaBoschRadarless'):
               tx = list(filter(lambda m: m[0] not in [0x30c, ], tx))
 
             # TODO: Temporary, should be fixed in panda firmware, safety_honda.h

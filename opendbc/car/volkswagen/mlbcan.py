@@ -51,30 +51,38 @@ def acc_control_value(main_switch_on, acc_faulted, long_active):
 def create_acc_accel_control(packer, bus, acc_type, acc_enabled, accel, acc_control, stopping, starting, esp_hold):
   commands = []
 
-  # TODO
-  """values = {
-    "ACS_Sta_ADR": acc_control,
-    "ACS_StSt_Info": acc_enabled,
-    "ACS_Typ_ACC": acc_type,
-    "ACS_Anhaltewunsch": acc_type == 1 and stopping,
-    "ACS_FreigSollB": acc_enabled,
-    "ACS_Sollbeschl": accel if acc_enabled else 3.01,
-    "ACS_zul_Regelabw": 0.2 if acc_enabled else 1.27,
-    "ACS_max_AendGrad": 3.0 if acc_enabled else 5.08,
-  }
+  def clamp(x, lo, hi):
+    return max(lo, min(hi, x))
 
-  commands.append(packer.make_can_msg("ACC_System", bus, values))"""
+  acc_05_values = {
+    "ACC_Status_ACC":             acc_control,
+    "ACC_StartStopp_Info":        acc_enabled,
+    "ACC_Verz_anf":               clamp(accel if acc_enabled else 3.015, -7.220, 3.015),
+    "ACC_zul_Regelabw":           0.2,
+    "ACC_Anhalten":               stopping,
+    "ACC_Loeseanforderung":       starting,
+    "ACC_Freigabe_Momentenanf":   1 if acc_enabled else 0,
+    "ACC_Freigabe_Verzanf":       1 if acc_enabled else 0,
+    # 
+    "ACC_Vorbefuellung_Bremsanlage": 0,
+    "ACC_Beeinflussung_ESP":         0,
+    "ACC_Betaetigung_EPB":           0,
+    "ACC_KD_Fehler":                 0,
+    # "ACC_Getriebestellung_P":      0,
+    # "ACC_ax_Getriebe":             0.0,
+  }
+  commands.append(packer.make_can_msg("ACC_05", bus, acc_05_values))
 
   return commands
 
 
 def acc_hud_status_value(main_switch_on, acc_faulted, long_active):
-  # TODO
-  return 0
+  # TODO: happens to resemble the ACC control value for now, but extend this for init/gas override later
+  return acc_control_value(main_switch_on, acc_faulted, long_active)
 
 
 def create_acc_hud_control(packer, bus, acc_hud_status, set_speed, lead_distance, distance):
-  """values = {
+  values = {
     "ACC_Status_Anzeige": acc_hud_status,
     "ACC_Wunschgeschw_02": set_speed if set_speed < 250 else 327.36,
     "ACC_Gesetzte_Zeitluecke": distance + 2,
@@ -82,7 +90,7 @@ def create_acc_hud_control(packer, bus, acc_hud_status, set_speed, lead_distance
     "ACC_Abstandsindex": lead_distance,
   }
 
-  return packer.make_can_msg("ACC_02", bus, values)"""
+  return packer.make_can_msg("ACC_02", bus, values)
   return 0
 
 
@@ -90,5 +98,7 @@ def volkswagen_mlb_checksum(address: int, sig, d: bytearray) -> int:
   # ACC_02 uses different checksum
   if address == 0x30C:
     return xor_checksum(address, sig, d, 0x0F)
+  elif address == 0x10D: # ACC_05
+    return xor_checksum(address, sig, d, 0x03)
   else:
     return crc8h2f_checksum(address, sig, d)
