@@ -1639,6 +1639,12 @@ BO_ 542 TPS_SCU: 7 SCU_D4
 BO_ 512 TPS_Tester: 7 Gateway_D4C7
  SG_ TPS_Tester_Data : 0|56@1+ (1.0,0.0) [0.0|72057594037927935] ""  SCU_D4
 
+BO_ 266 TSK_01: 8 XXX
+ SG_ TSK_01_CHK : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ TSK_01_BZ : 8|4@1+ (1,0) [0|15] "" XXX
+ SG_ KBI_Handbremse : 31|1@1+ (1,0) [0|1] "" XXX
+ SG_ GearPosition : 24|1@1+ (1,0) [0|1] "" XXX
+
 BO_ 268 TSK_02: 8 XXX
  SG_ TSK_02_CHK : 0|8@1+ (1,0) [0|255] "" XXX
  SG_ COUNTER : 8|4@1+ (1,0) [0|15] "" XXX
@@ -2705,3 +2711,4 @@ VAL_ 273 TSK_Codierung_ACC 0 "TSK_korrekt_auf_kein_ACC_codiert_oder_TSK_falsch_c
 VAL_ 273 TSK_Zwangszusch_ESP 0 "keine_ESP_ASR_Beeinflussung" 1 "ESP_ASR_Beeinflussung" ;
 VAL_ 273 TSK_Freig_Verzoeg_Anf 0 "Verzoegerungsanforderung_nicht_freigegeben" 1 "Verzoegerungsanforderung_freigegeben" ;
 VAL_ 1414 WH_KD_Fehler 0 "kein_KD_Fehler" 1 "KD_Fehler" ;
+VAL_ 266 GearPosition 0 "D" 1 "N";
