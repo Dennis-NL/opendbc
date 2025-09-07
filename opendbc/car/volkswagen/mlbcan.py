@@ -59,29 +59,20 @@ def acc_control_value(main_switch_on, acc_faulted, long_active):
 def create_acc_accel_control(packer, bus, acc_type, acc_enabled, accel, acc_control, stopping, starting, esp_hold):
   commands = []
 
-  def clamp(x, lo, hi):
-    return max(lo, min(hi, x))
-
-  acc_05_values = {
-    "ACC_Status_ACC":             acc_control,
-    "ACC_StartStopp_Info":        acc_enabled,
-    "ACC_Verz_anf":               clamp(accel if acc_enabled else 3.015, -7.220, 3.015),
-    "ACC_zul_Regelabw":           0.2,
-    "ACC_Anhalten":               stopping,
-    "ACC_Loeseanforderung":       starting,
-    "ACC_Freigabe_Momentenanf":   1 if acc_enabled else 0,
-    "ACC_Freigabe_Verzanf":       1 if acc_enabled else 0,
-    # 
-    "ACC_Vorbefuellung_Bremsanlage": 0,
-    "ACC_Beeinflussung_ESP":         0,
-    "ACC_Betaetigung_EPB":           0,
-    "ACC_KD_Fehler":                 0,
-    # "ACC_Getriebestellung_P":      0,
-    # "ACC_ax_Getriebe":             0.0,
+  acc_01_values = {
+    "ACC_Status_ACC": acc_control,
+    "ACC_Sollbeschleunigung": accel if acc_enabled else 0.0,   # mag -7.22..+3.01
+    "ACC_zul_Regelabw_unten": 0.2,
+    "ACC_zul_Regelabw_oben": 0.2,
+    "ACC_neg_Sollbeschl_Grad": 4.0 if acc_enabled else 0.0,
+    "ACC_pos_Sollbeschl_Grad": 4.0 if acc_enabled else 0.0,
+    "ACC_Dynamik": 2,
+    "ACC_Minimale_Bremsung": 0,
   }
-  commands.append(packer.make_can_msg("ACC_05", bus, acc_05_values))
+  commands.append(packer.make_can_msg("ACC_01", bus, acc_01_values))
 
   return commands
+
 
 
 def acc_hud_status_value(main_switch_on, acc_faulted, long_active):

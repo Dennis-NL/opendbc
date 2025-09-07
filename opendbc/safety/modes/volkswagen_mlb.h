@@ -22,7 +22,7 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
     {MSG_LS_01, 2, 4, .check_relay = false},
     {MSG_LDW_02, 0, 8, .check_relay = true},
     {MSG_ACC_02, 2, 8, .check_relay = false},
-    {MSG_ACC_05, 2, 8, .check_relay = true},
+    {MSG_ACC_01, 2, 8, .check_relay = true},
   };
 
   static RxCheck volkswagen_mlb_rx_checks[] = {
@@ -173,16 +173,23 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *msg) {
     }
   }
 
-  // Safety check for ACC_05 acceleration request
-  // To avoid floating point math, scale upward and compare to pre-scaled safety m/s2 boundaries
-  if (msg->addr == MSG_ACC_05) {
+  // Safety check for ACC_01 acceleration request
+  // To avoid floating point math, scale upward and compare to pre-scaled safety m/s^2 boundaries
+  if (msg->addr == MSG_ACC_01) {
     bool violation = false;
-    int desired_accel = 0;
 
-    // Signal: ACC_05.ACC_Verz_anf (acceleration in m/s2, scale 0.005, offset -7.22)
-    desired_accel = ((((msg->data[4] & 0x7FU) << 8) | msg->data[3]) * 5U) - 7220U;
+    // Parse only if frame is long enough (avoid OOB if ACC_01 is DLC=4 on your platform)
+    if (msg->len >= 5U) {
+      // Signal: ACC_01.ACC_Verz_anf (acceleration), scale 0.005, offset -7.22
+      // desired_accel in 0.001 m/s^2
+      uint16_t raw = (uint16_t)(((msg->data[4] & 0x7FU) << 8) | msg->data[3]);
+      int desired_accel = (int)raw * 5 - 7220;
 
-    violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
+      violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
+    } else {
+      // No accel field present -> treat as violation to be safe
+      violation = true;
+    }
 
     if (violation) {
       tx = false;

@@ -16,7 +16,7 @@ MSG_LS_01 = 0x10B       # TX by OP, ACC control buttons for cancel/resume
 MSG_TSK_02 = 0x10C      # RX from ECU, for ACC status from drivetrain coordinator
 MSG_HCA_01 = 0x126      # TX by OP, Heading Control Assist steering torque
 MSG_LDW_02 = 0x397      # TX by OP, Lane line recognition and text alerts
-MSG_ACC_05 = 0x10D   # TX by OP, ACC control instructions (longitudinal)
+MSG_ACC_01 = 0x311   # TX by OP, ACC control instructions (longitudinal)
 MSG_ACC_02 = 0x30C   # TX by OP, ACC HUD data to the instrument cluster
 
 
@@ -150,10 +150,10 @@ class TestVolkswagenMlbStockSafety(TestVolkswagenMlbSafety):
     self.assertFalse(self.safety.get_controls_allowed(), "controls allowed after cancel")
 
 class TestVolkswagenMlbLongSafety(TestVolkswagenMlbSafety):
-  TX_MSGS = [[MSG_HCA_01, 0], [MSG_LDW_02, 0], [MSG_LS_01, 0], [MSG_LS_01, 2], [MSG_ACC_02, 2], [MSG_ACC_05, 2]]
+  TX_MSGS = [[MSG_HCA_01, 0], [MSG_LDW_02, 0], [MSG_LS_01, 0], [MSG_LS_01, 2], [MSG_ACC_02, 2], [MSG_ACC_01, 2]]
 
-  FWD_BLACKLISTED_ADDRS = {2: [MSG_HCA_01, MSG_LDW_02, MSG_ACC_02, MSG_ACC_05, MSG_LS_01]}
-  RELAY_MALFUNCTION_ADDRS = {0: (MSG_HCA_01, MSG_LDW_02, MSG_ACC_05, MSG_ACC_02), 2: (MSG_LS_01,)}
+  FWD_BLACKLISTED_ADDRS = {2: [MSG_HCA_01, MSG_LDW_02, MSG_ACC_02, MSG_ACC_01, MSG_LS_01]}
+  RELAY_MALFUNCTION_ADDRS = {0: (MSG_HCA_01, MSG_LDW_02, MSG_ACC_01, MSG_ACC_02), 2: (MSG_LS_01,)}
   INACTIVE_ACCEL = 3.01
 
   def setUp(self):
@@ -206,7 +206,7 @@ class TestVolkswagenMlbLongSafety(TestVolkswagenMlbSafety):
         send = (controls_allowed and MIN_ACCEL <= accel <= MAX_ACCEL) or is_inactive_accel
         self.safety.set_controls_allowed(controls_allowed)
         # primary accel request
-        self.assertEqual(send, self._tx(self._acc_05_msg(accel)), (controls_allowed, accel))
+        self.assertEqual(send, self._tx(self._acc_01_msg(accel)), (controls_allowed, accel))
 
 
 
