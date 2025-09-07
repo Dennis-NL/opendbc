@@ -16,7 +16,7 @@ MSG_LS_01 = 0x10B       # TX by OP, ACC control buttons for cancel/resume
 MSG_TSK_02 = 0x10C      # RX from ECU, for ACC status from drivetrain coordinator
 MSG_HCA_01 = 0x126      # TX by OP, Heading Control Assist steering torque
 MSG_LDW_02 = 0x397      # TX by OP, Lane line recognition and text alerts
-MSG_ACC_01 = 0x311   # TX by OP, ACC control instructions (longitudinal)
+MSG_ACC_01 = 0x109   # TX by OP, ACC control instructions (longitudinal)
 MSG_ACC_02 = 0x30C   # TX by OP, ACC HUD data to the instrument cluster
 
 
