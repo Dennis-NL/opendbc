@@ -434,6 +434,12 @@ class CAR(Platforms):
     chassis_codes={"8V", "FF"},
     wmis={WMI.AUDI_GERMANY_CAR, WMI.AUDI_SPORT},
   )
+  AUDI_A4_MK4 = VolkswagenMLBPlatformConfig(
+    [VWCarDocs("Audi A4 2007-16")],
+    VolkswagenCarSpecs(mass=1650, wheelbase=2.81),
+    chassis_codes={"8K"},
+    wmis={WMI.AUDI_GERMANY_CAR},
+  )
   AUDI_Q2_MK1 = VolkswagenMQBPlatformConfig(
     [VWCarDocs("Audi Q2 2018")],
     VolkswagenCarSpecs(mass=1205, wheelbase=2.61),
