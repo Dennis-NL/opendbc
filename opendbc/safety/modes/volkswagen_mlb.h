@@ -177,19 +177,12 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *msg) {
   // To avoid floating point math, scale upward and compare to pre-scaled safety m/s^2 boundaries
   if (msg->addr == MSG_ACC_01) {
     bool violation = false;
+    int desired_accel = 0;
 
-    // Parse only if frame is long enough (avoid OOB if ACC_01 is DLC=4 on your platform)
-    if (msg->len >= 5U) {
-      // Signal: ACC_01.ACC_Verz_anf (acceleration), scale 0.005, offset -7.22
-      // desired_accel in 0.001 m/s^2
-      uint16_t raw = (uint16_t)(((msg->data[4] & 0x7FU) << 8) | msg->data[3]);
-      int desired_accel = (int)raw * 5 - 7220;
+    // Signal: ACC_01.ACC_Sollbeschleunigung (acceleration in m/s^2, scale 0.005, offset -7.22)
+    desired_accel = ((((msg->data[4] & 0x07U) << 8) | msg->data[3]) * 5U) - 7220U;
 
-      violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
-    } else {
-      // No accel field present -> treat as violation to be safe
-      violation = true;
-    }
+    violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
 
     if (violation) {
       tx = false;
