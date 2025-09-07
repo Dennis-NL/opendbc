@@ -185,7 +185,7 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *msg) {
     violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
 
     if (violation) {
-      tx = false;
+      //tx = false;
     }
   }
 
