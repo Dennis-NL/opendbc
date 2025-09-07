@@ -176,18 +176,17 @@ static bool volkswagen_mlb_tx_hook(const CANPacket_t *msg) {
   // Safety check for ACC_01 acceleration request
   // To avoid floating point math, scale upward and compare to pre-scaled safety m/s^2 boundaries
   if (msg->addr == MSG_ACC_01) {
-    tx = true; 
-  //  bool violation = false;
-  //  int desired_accel = 0;
+    bool violation = false;
+    int desired_accel = 0;
 
     // Signal: ACC_01.ACC_Sollbeschleunigung (acceleration in m/s^2, scale 0.005, offset -7.22)
-  //  desired_accel = ((((msg->data[4] & 0x07U) << 8) | msg->data[3]) * 5U) - 7220U;
+    desired_accel = ((((msg->data[4] & 0x07U) << 8) | msg->data[3]) * 5U) - 7220U;
 
-  //  violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
+    violation |= longitudinal_accel_checks(desired_accel, VOLKSWAGEN_MLB_LONG_LIMITS);
 
-  //  if (violation) {
-  //    tx = false;
-  //  }
+    if (violation) {
+      tx = false;
+    }
   }
 
   // FORCE CANCEL: ensuring that only the cancel button press is sent when controls are off.
