@@ -18,11 +18,9 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
 
   static const CanMsg VOLKSWAGEN_MLB_LONG_TX_MSGS[] = {
     {MSG_HCA_01, 0, 8, .check_relay = true},
-    {MSG_LS_01, 0, 4, .check_relay = false},
-    {MSG_LS_01, 2, 4, .check_relay = false},
     {MSG_LDW_02, 0, 8, .check_relay = true},
-    {MSG_ACC_02, 2, 8, .check_relay = false},
-    {MSG_ACC_01, 2, 8, .check_relay = true},
+    {MSG_ACC_02, 0, 8, .check_relay = true},
+    {MSG_ACC_01, 0, 8, .check_relay = true},
   };
 
   static RxCheck volkswagen_mlb_rx_checks[] = {
@@ -32,7 +30,6 @@ static safety_config volkswagen_mlb_init(uint16_t param) {
     {.msg = {{MSG_TSK_02, 0, 8, .ignore_checksum = true, .max_counter = 15U, .frequency = 50U, .ignore_quality_flag = true}, { 0 }, { 0 }}},
     {.msg = {{MSG_MOTOR_03, 0, 8, .ignore_checksum = true, .max_counter = 15U, .frequency = 100U, .ignore_quality_flag = true}, { 0 }, { 0 }}},
     {.msg = {{MSG_LS_01, 0, 4, .ignore_checksum = true, .max_counter = 15U, .frequency = 10U, .ignore_quality_flag = true}, { 0 }, { 0 }}},
-    {.msg = {{MSG_ACC_02, 2, 8, .ignore_checksum = true, .max_counter = 15U, .frequency = 17U, .ignore_quality_flag = true}, { 0 }, { 0 }}},
   };
 
   UNUSED(param);
