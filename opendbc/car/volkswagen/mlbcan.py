@@ -70,15 +70,8 @@ def create_acc_accel_control(packer, bus, acc_type, acc_enabled, accel, acc_cont
     "ACC_Minimale_Bremsung": 0,
   }
 
-  print("DEBUG acc_01_values:")
-  for k, v in acc_01_values.items():
-      print(" ", k, "=", v, type(v))
 
-  msg = packer.make_can_msg("ACC_01", bus, acc_01_values)
-  print("DEBUG packed:", msg, [type(x) for x in msg])
-  commands.append(packer.make_can_msg("ACC_01", bus, acc_01_values))
-
-  return commands
+  return packer.make_can_msg("ACC_01", bus, acc_01_values)
 
 
 def acc_hud_status_value(main_switch_on, acc_faulted, long_active):
