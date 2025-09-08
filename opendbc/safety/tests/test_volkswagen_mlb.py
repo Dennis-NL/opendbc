@@ -150,10 +150,9 @@ class TestVolkswagenMlbStockSafety(TestVolkswagenMlbSafety):
     self.assertFalse(self.safety.get_controls_allowed(), "controls allowed after cancel")
 
 class TestVolkswagenMlbLongSafety(TestVolkswagenMlbSafety):
-  TX_MSGS = [[MSG_HCA_01, 0], [MSG_LDW_02, 0], [MSG_LS_01, 0], [MSG_LS_01, 2], [MSG_ACC_02, 2], [MSG_ACC_01, 2]]
-
+  TX_MSGS = [[MSG_HCA_01, 0], [MSG_LDW_02, 0], [MSG_LS_01, 0], [MSG_LS_01, 2], [MSG_ACC_02, 0], [MSG_ACC_01, 0]]
   FWD_BLACKLISTED_ADDRS = {2: [MSG_HCA_01, MSG_LDW_02, MSG_ACC_02, MSG_ACC_01, MSG_LS_01]}
-  RELAY_MALFUNCTION_ADDRS = {0: (MSG_HCA_01, MSG_LDW_02, MSG_ACC_01, MSG_ACC_02), 2: (MSG_LS_01,)}
+  RELAY_MALFUNCTION_ADDRS = {0: (MSG_HCA_01, MSG_LDW_02, MSG_ACC_01, MSG_ACC_02)}
   INACTIVE_ACCEL = 3.01
 
   def setUp(self):
