@@ -64,15 +64,14 @@ def create_acc_accel_control(packer, bus, acc_type, acc_enabled, accel, acc_cont
     "ACC_Sollbeschleunigung": accel if acc_enabled else 3.01,
     "ACC_zul_Regelabw_unten": 0.2,
     "ACC_zul_Regelabw_oben": 0.2,
-    "ACC_neg_Sollbeschl_Grad": 4.0 if acc_enabled else 0.0,
-    "ACC_pos_Sollbeschl_Grad": 4.0 if acc_enabled else 0.0,
+    "ACC_neg_Sollbeschl_Grad": 4.0 if acc_enabled else 0,
+    "ACC_pos_Sollbeschl_Grad": 4.0 if acc_enabled else 0,
     "ACC_Dynamik": 2,
     "ACC_Minimale_Bremsung": 0,
   }
   commands.append(packer.make_can_msg("ACC_01", bus, acc_01_values))
 
   return commands
-
 
 
 def acc_hud_status_value(main_switch_on, acc_faulted, long_active):
@@ -90,7 +89,6 @@ def create_acc_hud_control(packer, bus, acc_hud_status, set_speed, lead_distance
   }
 
   return packer.make_can_msg("ACC_02", bus, values)
-  return 0
 
 
 def volkswagen_mlb_checksum(address: int, sig, d: bytearray) -> int:
