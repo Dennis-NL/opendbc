@@ -34,6 +34,20 @@ BS_:
 
 BU_: Airbag_D4 EPB_D4 ESP_D4 Gateway_D4C7 Getriebe_AL551_951_D4_C7 Getriebe_DL501_C7 Getriebe_VL381_C7 LWS_D4 Motor_EDC17_D4 Motor_ME17_BY Motor_MED17_SIMOS8_D4 Motor_Slave_D4 QSP_D4 SAK_C7 SCR_C7 SCU_D4
 
+BO_ 265 ACC_01: 8 Gateway_B8
+ SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ COUNTER : 8|4@1+ (1,0) [0|15] ""  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_zul_Regelabw_unten : 16|6@1+ (0.024,0) [0|1.512] "Unit_MeterPerSeconSquar"  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_Sollbeschleunigung : 24|11@1+ (0.005,-7.22) [-7.22|3.01] "Unit_MeterPerSeconSquar"  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_zul_Regelabw_oben : 35|5@1+ (0.0625,0) [0|1.9375] "Unit_MeterPerSeconSquar"  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_neg_Sollbeschl_Grad : 40|8@1+ (0.05,0) [0|12.7] "Unit_MeterPerCubicSecon"  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_pos_Sollbeschl_Grad : 48|8@1+ (0.05,0) [0|12.7] "Unit_MeterPerCubicSecon"  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_Dynamik : 58|2@1+ (1,0) [0|3] ""  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+ SG_ ACC_Anfahren : 56|1@1+ (1,0) [0|1] ""  XXX
+ SG_ ACC_Anhalten : 57|1@1+ (1,0) [0|1] ""  XXX
+ SG_ ACC_Status_ACC : 60|3@1+ (1,0) [0|7] ""  XXX
+ SG_ ACC_Minimale_Bremsung : 63|1@1+ (1,0) [0|1] ""  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
+
 
 BO_ 780 ACC_02: 8 Gateway_D4C7
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  HUD_C7,Kombi_D4
@@ -67,7 +81,7 @@ BO_ 804 ACC_04: 8 Gateway_D4C7
  SG_ ACC_Charisma_Umschaltung : 61|2@1+ (1.0,0.0) [0.0|3] ""  Vector__XXX
 
 BO_ 269 ACC_05: 8 Gateway_D4C7
- SG_ ACC_05_CHK : 0|8@1+ (1,0) [0|255] ""  EPB_D4,Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
+ SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  EPB_D4,Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ COUNTER : 8|4@1+ (1,0) [0|15] ""  EPB_D4,Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ ACC_Freigabe_Momentenanf : 12|1@1+ (1.0,0.0) [0.0|1] ""  Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ ACC_Freigabe_Verzanf : 13|1@1+ (1.0,0.0) [0.0|1] ""  Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7
@@ -1639,6 +1653,12 @@ BO_ 542 TPS_SCU: 7 SCU_D4
 BO_ 512 TPS_Tester: 7 Gateway_D4C7
  SG_ TPS_Tester_Data : 0|56@1+ (1.0,0.0) [0.0|72057594037927935] ""  SCU_D4
 
+BO_ 266 TSK_01: 8 XXX
+ SG_ TSK_01_CHK : 0|8@1+ (1,0) [0|255] "" XXX
+ SG_ TSK_01_BZ : 8|4@1+ (1,0) [0|15] "" XXX
+ SG_ KBI_Handbremse : 31|1@1+ (1,0) [0|1] "" XXX
+ SG_ GearPosition : 24|1@1+ (1,0) [0|1] "" XXX
+
 BO_ 268 TSK_02: 8 XXX
  SG_ TSK_02_CHK : 0|8@1+ (1,0) [0|255] "" XXX
  SG_ COUNTER : 8|4@1+ (1,0) [0|15] "" XXX
@@ -2705,3 +2725,4 @@ VAL_ 273 TSK_Codierung_ACC 0 "TSK_korrekt_auf_kein_ACC_codiert_oder_TSK_falsch_c
 VAL_ 273 TSK_Zwangszusch_ESP 0 "keine_ESP_ASR_Beeinflussung" 1 "ESP_ASR_Beeinflussung" ;
 VAL_ 273 TSK_Freig_Verzoeg_Anf 0 "Verzoegerungsanforderung_nicht_freigegeben" 1 "Verzoegerungsanforderung_freigegeben" ;
 VAL_ 1414 WH_KD_Fehler 0 "kein_KD_Fehler" 1 "KD_Fehler" ;
+VAL_ 266 GearPosition 0 "D" 1 "N";
