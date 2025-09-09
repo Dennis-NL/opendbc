@@ -1653,11 +1653,11 @@ BO_ 542 TPS_SCU: 7 SCU_D4
 BO_ 512 TPS_Tester: 7 Gateway_D4C7
  SG_ TPS_Tester_Data : 0|56@1+ (1.0,0.0) [0.0|72057594037927935] ""  SCU_D4
 
-BO_ 266 TSK_01: 8 XXX
- SG_ TSK_01_CHK : 0|8@1+ (1,0) [0|255] "" XXX
- SG_ TSK_01_BZ : 8|4@1+ (1,0) [0|15] "" XXX
- SG_ KBI_Handbremse : 31|1@1+ (1,0) [0|1] "" XXX
- SG_ GearPosition : 24|1@1+ (1,0) [0|1] "" XXX
+BO_ 266 TSK_01: 8 Motor_MLB_AU48_AU416_Diesel
+ SG_ TSK_01_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_B8
+ SG_ TSK_01_BZ : 8|4@1+ (1,0) [0|15] ""  Gateway_B8
+ SG_ TSK_Status_AB : 16|24@1+ (1,0) [0|16777215] ""  Gateway_B8
+ SG_ TSK_amax_moeglich : 48|9@1+ (0.024,-2.016) [-2.016|10.224] "Unit_MeterPerSeconSquar"  Gateway_B8
 
 BO_ 268 TSK_02: 8 XXX
  SG_ TSK_02_CHK : 0|8@1+ (1,0) [0|255] "" XXX
@@ -2725,4 +2725,23 @@ VAL_ 273 TSK_Codierung_ACC 0 "TSK_korrekt_auf_kein_ACC_codiert_oder_TSK_falsch_c
 VAL_ 273 TSK_Zwangszusch_ESP 0 "keine_ESP_ASR_Beeinflussung" 1 "ESP_ASR_Beeinflussung" ;
 VAL_ 273 TSK_Freig_Verzoeg_Anf 0 "Verzoegerungsanforderung_nicht_freigegeben" 1 "Verzoegerungsanforderung_freigegeben" ;
 VAL_ 1414 WH_KD_Fehler 0 "kein_KD_Fehler" 1 "KD_Fehler" ;
-VAL_ 266 GearPosition 0 "D" 1 "N";
+VAL_ 266 TSK_amax_moeglich 511 "nicht definiert" ;
+VAL_ 268 TSK_Anhalten 0 "kein Anhalten gew�nscht" 1 "Anhalten gew�nscht" ;
+VAL_ 268 TSK_Standby_Anf_ESP 0 "keine_Standby_Anforderung" 1 "Standby_Anforderung" ;
+VAL_ 268 TSK_Verzoeg_Anf 255 "nicht_definiert" ;
+VAL_ 780 ACC_Wunschgeschw_02 1023 "keine_Anzeige" ;
+VAL_ 780 ACC_Status_Prim_Anz 0 "Symbol nicht beleuchtet" 1 "Farbe 1 (typisch 'gruen')" 2 "Farbe 2 (typisch 'rot')" 3 "Farbe 3 (typisch 'gelb')" ;
+VAL_ 780 ACC_Abstandsindex 0 "Sonderanzeige_graue_Fahrbahn" 1022 "Sonderanzeige_graue_Fahrbahn" 1023 "Sonderanzeige_Fahrbahn_mit_gruenem_roten_Bereich" ;
+VAL_ 780 ACC_Akustik_02 0 "keine_Akustik" 1 "hochpriore_Akustik" 2 "niederpriore_Akustik" 3 "hochpriore_Dauerakustik" ;
+VAL_ 780 ACC_Warnung_Verkehrszeichen_1 0 "keine_Warnung_Initialwert" 1 "Warnung" ;
+VAL_ 780 ACC_Gesetzte_Zeitluecke 0 "keine_Anzeige" 1 "Zeitluecke_1" 2 "Zeitluecke_2" 3 "Zeitluecke_3" 4 "Zeitluecke_4" 5 "Zeitluecke_5" 6 "nicht_definiert" 7 "nicht_definiert" ;
+VAL_ 780 ACC_Optischer_Fahrerhinweis 0 "optischer_Fahrerhinweis_AUS" 1 "optischer_Fahrerhinweis_EIN" ;
+VAL_ 780 ACC_Typ_Tachokranz 0 "Tachokranz_lang" 1 "Tachokranz_kurz" ;
+VAL_ 780 ACC_Anzeige_Zeitluecke 0 "Anzeige_Zeitluecke_nicht_angefordert" 1 "Anzeige_Zeitluecke_angefordert" ;
+VAL_ 780 ACC_Tachokranz 0 "Tachokranz_nicht_beleuchtet" 1 "Tachokranz_beleuchtet" ;
+VAL_ 780 ACC_Display_Prio 0 "hoechste_Prio" 1 "mittlere_Prio" 2 "geringe_Prio" 3 "keine_Prio" ;
+VAL_ 780 ACC_Relevantes_Objekt 0 "Symbol_nicht_beleuchtet" 1 "Farbe_1_typisch_gruen" 2 "Farbe_2_typisch_rot" 3 "Farbe_3_typisch_gelb" ;
+VAL_ 780 ACC_Texte_Primaeranz 0 "keine Anzeige" 1 "ACC nicht verfuegbar !" 2 "Auto_Auto_ _ _" 3 "Auto_ _Auto_ _" 4 "Auto_ _ _Auto_" 5 "Auto_ _ _ _Auto" 6 "Auto_Auto_ _ _ Gong (durchgestrichen)" 7 "Auto_ _Auto_ _ Gong (durchgestrichen)" 8 "Auto_ _ _Auto_ Gong (durchgestrichen)" 9 "Auto_ _ _ _Auto Gong (durchgestrichen)" 10 "ACC bereit" 11 "keine Abstandsregelung" 12 "ACC Sensor Sicht !" 13 "ACC nicht verfuegbar" 14 "o  o  o" 15 "Hochschalten" 16 "ESP Eingriff" 17 "Herunterschalten" 18 "Parkbremse !" 19 "Geschwindigkeitsgrenze" 20 "Waehlhebelposition !" 21 "VDA ACC-Symbol YYY km/h / mph" 22 "Tempolimit XXX km/h / mph" 23 "Kurve XXX km/h / mph" 24 "ACC Abschaltung" 25 "Symbol 'Eieruhr'" 26 "!" 27 "--- km/h / mph" 28 "XXX km/h / mph (Schriftart 2)" 29 "Lenkradwinkel" 30 "Anfahren bestaetigen" 31 "Fahrzeug verloren" 32 "Im Stand nicht moeglich" 33 "Ungueltiger Anfahrbefehl" 34 "Tuer offen !" 35 "Fahrer Gurtschloss offen !" 36 "Schalthebelposition !" 37 "Drehzahl !" 38 "Kurvenassistent aus" 39 "Tempolimit aus" 40 "Abbiegeassistent" 41 "Ortsanfang XXX km/h / mph" 42 "Ortsende XXX km/h / mph" 43 "Tempolimit Ende XXX km/h / mph" 44 "HDC aktiv" 45 "braking guard Bremsruck" 46 "braking guard aus" 47 "braking guard aus" 48 "Uebernehmen !" 49 "Steigung zu gross" 50 "Stehendes Objekt voraus" 51 "SET / 'GRA Symbol'___xxx km/h / mph" 52 "SET / 'GRA Symbol' xxx km/h / mph" 53 "ACC aus" 54 "ACC startet" 55 "ACC reinigen" 56 "ACC Fehler" 57 "ACC haelt an !" 58 "Bremse betaetigen !" 59 "Kupplung betaetigt" 60 "LIM AUS" 61 "LIM AKTIV" 62 "LIM PASSIV" 63 "LIM FEHLER" 64 "Bremse ueberhitzt !" 65 "Bremse haelt !" 66 "ESP PASSIV !" 67 "ACC_anfahrbereit" 68 "Gang_einlegen" 69 "Rechtsueberholen_verhindert" 70 "Linksueberholen_verhindert" 71 "Achtung_Geschwindigkeitsueberschreitung" 72 "Tempolimit_und_Kurvenassistent_nicht_verfuegbar" ;
+VAL_ 780 ACC_Wunschgeschw_erreicht 0 "Wunschgeschwindigkeit_nicht_erreicht" 1 "Wunschgeschwindigkeit_erreicht" ;
+VAL_ 780 ACC_Typ_Tachokranz_unten 0 "LEDs_an" 1 "LEDs_aus" ;
+VAL_ 780 ACC_Status_Anzeige 0 "ACC_GRA_Hauptschalter_aus" 1 "ACC_in_Init_nicht_bei_GRA" 2 "ACC_GRA_passiv" 3 "ACC_GRA_aktiv" 4 "ACC_GRA_im_Hintergrund_uebertreten" 5 "ACC_GRA_Abschaltreaktion" 6 "ACC_reversibel_aus_nicht_bei_GRA" 7 "ACC_GRA_irreversibel_aus" ;
