@@ -90,10 +90,9 @@ static void volkswagen_mlb_rx_hook(const CANPacket_t *msg) {
         pcm_cruise_check(cruise_engaged);
       }
 
-      // FIXME: cruise main switch state not yet properly detected
-      // if (!acc_main_on) {
-      //   controls_allowed = false;
-      // }
+       if (!acc_main_on) {
+         controls_allowed = false;
+       }
     }
 
     if (msg->addr == MSG_LS_01) {
@@ -103,16 +102,15 @@ static void volkswagen_mlb_rx_hook(const CANPacket_t *msg) {
       if (volkswagen_longitudinal) {
         bool set_button = GET_BIT(msg, 16U);
         bool resume_button = GET_BIT(msg, 19U);
-        if ((volkswagen_set_button_prev && !set_button) ||
-            (volkswagen_resume_button_prev && !resume_button)) {
-          controls_allowed = GET_BIT(msg, 12U);  // LS_Hauptschalter
+        if ((volkswagen_set_button_prev && !set_button) || (volkswagen_resume_button_prev && !resume_button)) {
+          controls_allowed = acc_main_on;
         }
         volkswagen_set_button_prev = set_button;
         volkswagen_resume_button_prev = resume_button;
       }
       // Always exit controls on rising edge of Cancel
       // Signal: LS_01.LS_Abbrechen : 13|1@1+
-      if (GET_BIT(msg, 13U) == 1U) {
+      if (GET_BIT(msg, 13U)) {
         controls_allowed = false;
       }
     }
@@ -125,8 +123,8 @@ static void volkswagen_mlb_rx_hook(const CANPacket_t *msg) {
     }
 
     if (msg->addr == MSG_ESP_05) {
-      // Signal: ESP_05.ESP_Fahrer_bremst (ESP detected driver brake pressure above threshold)
-      volkswagen_mlb_brake_pressure_detected = (msg->data[3] & 0x4U) >> 2;
+      // Signal: ESP_05.ESP_Status_Bremsdruck (ESP detected driver brake pressure above threshold)
+      volkswagen_mlb_brake_pressure_detected = GET_BIT(msg, 61U);
     }
 
     brake_pressed = volkswagen_mlb_brake_pedal_switch || volkswagen_mlb_brake_pressure_detected;

@@ -65,7 +65,7 @@ class CarState(CarStateBase):
       ret.gasPressed = pt_cp.vl["Motor_03"]["MO_Fahrpedalrohwert_01"] > 0
       ret.brake = pt_cp.vl["ESP_05"]["ESP_Bremsdruck"]
       brake_pedal_pressed = bool(pt_cp.vl["Motor_03"]["MO_Fahrer_bremst"])
-      brake_pressure_detected = bool(pt_cp.vl["ESP_05"]["ESP_Fahrer_bremst"])
+      brake_pressure_detected = bool(pt_cp.vl["ESP_05"]["ESP_Status_Bremsdruck"])
       ret.brakePressed = brake_pedal_pressed or brake_pressure_detected
 
       ret.espDisabled = pt_cp.vl["ESP_01"]["ESP_Tastung_passiv"] != 0
@@ -102,6 +102,8 @@ class CarState(CarStateBase):
       self.acc_type = ext_cp.vl["ACC_02"]["ACC_Typ_Tachokranz"]
 
       self.gra_stock_values = pt_cp.vl["LS_01"]
+
+      self.upscale_lead_car_signal = True
 
     else:
       # MQB-specific
