@@ -69,7 +69,7 @@ def create_acc_accel_control(packer, bus, acc_type, acc_enabled, accel, acc_cont
     "ACC_Dynamik": 3,
     "ACC_Anfahren": 1,
     "ACC_Anhalten": 1,
-    "NEW_SIGNAL_2", 1,
+    "NEW_SIGNAL_2": 1,
   }
   commands.append(packer.make_can_msg("ACC_01", bus, acc_01_values))
 
