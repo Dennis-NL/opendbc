@@ -34,6 +34,12 @@ BS_:
 
 BU_: Airbag_D4 EPB_D4 ESP_D4 Gateway_D4C7 Getriebe_AL551_951_D4_C7 Getriebe_DL501_C7 Getriebe_VL381_C7 LWS_D4 Motor_EDC17_D4 Motor_ME17_BY Motor_MED17_SIMOS8_D4 Motor_Slave_D4 QSP_D4 SAK_C7 SCR_C7 SCU_D4
 
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ AGA_Charisma_FahrPr : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ AGA_Charisma_Status : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ AGA_Verstaerker_Mute : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ TPS_Airbag_Data : 0|56@1+ (1,0) [0|7.20575940379279E+016] "" Vector__XXX
+
 BO_ 265 ACC_01: 8 Gateway_B8
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
  SG_ COUNTER : 8|4@1+ (1,0) [0|15] ""  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
@@ -47,7 +53,6 @@ BO_ 265 ACC_01: 8 Gateway_B8
  SG_ ACC_Anhalten : 57|1@1+ (1,0) [0|1] ""  XXX
  SG_ ACC_Status_ACC : 60|3@1+ (1,0) [0|7] ""  XXX
  SG_ ACC_Minimale_Bremsung : 63|1@1+ (1,0) [0|1] ""  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
-
 
 BO_ 780 ACC_02: 8 Gateway_D4C7
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  HUD_C7,Kombi_D4
@@ -99,6 +104,7 @@ BO_ 269 ACC_05: 8 Gateway_D4C7
  SG_ ACC_Beeinflussung_ESP : 61|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ ACC_Anhalten : 62|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ ACC_KD_Fehler : 63|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
+ 
 
 BO_ 64 Airbag_01: 8 Airbag_D4
  SG_ Airbag_01_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
@@ -166,6 +172,84 @@ BO_ 777 BEM_01: 4 Gateway_D4C7
  SG_ BEM_Anf_KL : 29|1@1+ (1.0,0.0) [0.0|1] ""  Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ BEM_StartStopp_Info : 30|2@1+ (1.0,0.0) [0.0|3] ""  Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
 
+BO_ 1635 BEM_02: 8 Gateway
+ SG_ BEM_02_Abschaltstufen : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ BEM_STH_Zielzeit : 3|4@1+ (5,0) [0|60] "Unit_Minut" Vector__XXX
+ SG_ BEM_MMI_Vorwarnung : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BEM_HL_Kontingentierung : 8|6@1+ (50,-1000) [-1000|1000] "Unit_Watt" Vector__XXX
+ SG_ NVEM_Anf_SD_schalten : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BEM_Generatordiagnose : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ BEM_Red_Innengeblaese : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ BEM_STH_Einschaltverbot : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BEM_HL_Regelung_Status : 21|3@1+ (1,0) [0|7] ""  Motor_MLB_AU64_AU57_Diesel
+ SG_ BEM_Ladezustand : 24|4@1+ (10,0) [0|100] "Unit_PerCent" Vector__XXX
+ SG_ BEM_Batteriediagnose : 28|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ MIB_Stromsparmodus : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BEM_DFM : 32|5@1+ (3.225,0.025) [0.025|100] "" Vector__XXX
+ SG_ BEM_REK_aktiv : 37|1@1+ (1,0) [0|1] ""  Motor_MLB_AU64_AU57_Diesel
+ SG_ BEM_EMLIN_ungueltig : 38|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BEM_Batt_Ab : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BEM_UBDM : 40|8@1+ (0.05,5) [5.05|17.7] "Unit_Volt" Vector__XXX
+ SG_ BEM_UGenSoll : 48|6@1+ (0.1,10.6) [10.6|16] "Unit_Volt" Vector__XXX
+ SG_ BEM_Anf_KL15_schalten : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 946 BEM_03: 8 Gateway
+ SG_ BEM_HYB_DC_uMinLV : 12|8@1+ (0.1,0) [0|25.3] "Unit_Volt"  LEH_Hybrid
+ SG_ BEM_HYB_DC_uSollLV : 20|6@1+ (0.1,10.6) [10.6|16] "Unit_Volt"  LEH_Hybrid
+ SG_ BEM_Freigabe_HV_Ladung : 26|1@1+ (1,0) [0|1] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ BEM_Hybrid_Info : 27|2@1+ (1,0) [0|3] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ BEM_NV_NachladAnf : 29|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1628 BMS_Hybrid_01: 8 BMS_Hybrid
+ SG_ BMS_HYB_ASV_hinten_Status : 13|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ BMS_HYB_ASV_vorne_Status : 14|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ BMS_HYB_KD_Fehler : 15|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ BMS_HYB_BattFanSpd : 16|4@1+ (10,0) [0|100] "Unit_PerCent"  Gateway
+ SG_ BMS_HYB_VentilationReq : 20|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ BMS_HYB_Spuelbetrieb_Status : 21|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ BMS_HYB_Kuehlung_Anf : 22|2@1+ (1,0) [0|3] ""  Gateway
+ SG_ BMS_HYB_Temp_vor_Verd : 24|8@1+ (0.5,-40) [-40|86.5] "Unit_DegreCelsi"  Gateway
+ SG_ BMS_HYB_Temp_nach_Verd : 32|8@1+ (0.5,-40) [-40|86.5] "Unit_DegreCelsi"  Gateway
+ SG_ BMS_Temperatur : 40|8@1+ (0.5,-40) [-40|86.5] "Unit_DegreCelsi"  Gateway
+ SG_ BMS_Temperatur_Ansaugluft : 48|8@1+ (0.5,-40) [-40|86.5] "Unit_DegreCelsi"  Gateway
+ SG_ BMS_IstSpannung_HV : 56|8@1+ (1,100) [100|350] "Unit_Volt"  Gateway
+
+BO_ 917 LWR_AFS_01: 8 AFS_MLB
+ SG_ AFS_Abbiegelicht_li_Anf : 0|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Abbiegelicht_re_Anf : 1|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Abbiegelicht_Dimm_Anf : 2|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Verfuegbarkeit_GLW : 3|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Status_adaptive_LV : 4|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Fernlicht_li_defekt : 5|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Fernlicht_re_defekt : 6|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Fernlicht_Status : 7|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_AFS_01_BZ : 8|4@1+ (1,0) [0|15] ""  Gateway_B8
+ SG_ AFS_Lampe : 12|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Lampe : 13|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Fehlertext : 14|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_LED_Blinkmode : 15|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Touristenmodus_aktiv : 16|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Charisma_FahrPr : 17|3@1+ (1,0) [0|7] ""  Gateway_B8
+ SG_ AFS_Charisma_Status : 20|2@1+ (1,0) [0|3] ""  Gateway_B8
+ SG_ AFS_Charisma_Umschaltung : 22|2@1+ (1,0) [0|3] ""  Gateway_B8
+ SG_ AFS_Allwetterlicht : 24|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Touristenmodus_verbaut : 25|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_adaptive_LV_verbaut : 26|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Reisemodus_Texte : 27|2@1+ (1,0) [0|3] ""  Gateway_B8
+ SG_ GLW_Sensor_blockiert : 29|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Pos_Schrittmotor : 32|8@1+ (0.4,0) [0|100] "Unit_PerCent"  Gateway_B8
+ SG_ LWR_Hoehenwert_VL : 40|8@1+ (1,-127) [-127|126] ""  Gateway_B8
+ SG_ LWR_Hoehenwert_HL : 48|8@1+ (1,-127) [-127|126] ""  Gateway_B8
+ SG_ AFS_Ersatzlicht_Links : 56|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ AFS_Ersatzlicht_Rechts : 57|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_AFS_Grundeinstellung : 58|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_AFS_Parametrisierung : 59|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Initialisierungslauf : 60|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Sicherheitsposition : 61|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_Modus : 62|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ LWR_KD_Fehler : 63|1@1+ (1,0) [0|1] ""  Gateway_B8
+ 
+
 BO_ 867 Blinkmodi_01: 4 Gateway_D4C7
  SG_ BM_ZV_auf : 0|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ BM_ZV_zu : 1|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
@@ -190,6 +274,82 @@ BO_ 867 Blinkmodi_01: 4 Gateway_D4C7
  SG_ BM_NBA_n_codiert_n_aktiv : 20|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ BM_NBA_Status : 21|2@1+ (1.0,0.0) [0.0|3] ""  Vector__XXX
  SG_ Blinken_FWB_aktiv : 23|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
+
+BO_ 1409 BCM2_02: 8 Gateway
+ SG_ BCM_FH_Freigabe : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_Komfortfkt_Freigabe : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_HSK_Freigabe : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_Verdeck_Freigabe : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_Status_Timer_KL15_Abschalt : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_Anford_AbschaltfreigabeKL15 : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_Unterdr_Zuendungsmeldung : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_KL15_Absch_FT : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_ist_Zustand_verfuegbar : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_P_verriegelt : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_verriegelt_intern_ist : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_verriegelt_extern_ist : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_verriegelt_intern_soll : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_verriegelt_extern_soll : 13|1@1+ (1,0) [0|1] ""  Motor_MLB_C7_PHEV
+ SG_ ZV_gesafet_extern_ist : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_gesafet_extern_soll : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_FT_offen : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_BT_offen : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_HL_offen : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_HR_offen : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_HD_offen : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_Turen_HD_zu : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_Einzeltuerentriegelung : 22|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_Heckeinzelentriegelung : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_ValetTaster_Fkts_LED : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_HHS_aktiv : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_Spg_Hzg_Ein : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZV_HS_offen : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZZH_Endlage_oben : 28|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZZH_Endlage_unten : 29|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ZZH_Endlage_unplausibel : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_KD_Fehler : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NGS_aktiv : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IRUE_aktiv : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DWA_aktiv : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Komp_Schutz_aktiv : 35|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NGS_Taster_Fkts_LED : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ IRUE_Taster_Fkts_LED : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ HD_Drehfalle_S1 : 38|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ HD_Sperrklinke_S2 : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_Verbau_Heckrollo : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_EZS_gedrueckt : 41|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM2_SST_gedrueckt : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LIM_alt : 43|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LIM_Innenbeleuchtung_V_aktiv : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LIM_Innenbeleuchtung_aktiv : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LIM_Taster_Rollolicht_hl : 46|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ LIM_Taster_Rollolicht_hr : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_Sperrklinke_FT : 48|1@1+ (1,0) [0|1] ""  EPB_MLB
+ SG_ LIM_Taster_Rollolicht_V : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCM_Tankwunsch : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ ZV_Tankklappe_offen : 52|1@1+ (1,0) [0|1] ""  Motor_MLB_C7_PHEV
+ SG_ BCM_Tankklappensteller_Fehler : 53|1@1+ (1,0) [0|1] ""  Motor_MLB_C7_PHEV
+ SG_ KST_Fahrer_Hinweise : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KST_Warn_P1_ZST_def : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KST_Warn_P2_ZST_def : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KST_Prio_Warn_03 : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KST_Prio_Warn_04 : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KST_Prio_Warn_05 : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 945 DC_Hybrid_01: 8 LEH_Hybrid
+ SG_ DC_Verbrauch : 0|10@1+ (1,0) [0|1023] "Unit_WattSecond" Vector__XXX
+ SG_ DC_Verbrauch_Ueberlauf : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DC_HYB_iAktLV : 12|10@1+ (1,-511) [-511|510] "Unit_Amper"  Gateway
+ SG_ DC_HYB_iAktReserveLV : 22|10@1+ (1,-511) [-511|510] "Unit_Amper"  Gateway
+ SG_ DC_HYB_uAktLV : 32|8@1+ (0.1,0) [0|25.3] "Unit_Volt"  Gateway
+ SG_ DC_HYB_LangsRegelung : 40|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ DC_HYB_Abregelung_Temperatur : 41|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ DC_HYB_Fehler_RedLeistung : 42|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ DC_HYB_Fehler_intern : 43|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ DC_HYB_Fehler_Spannung : 44|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ DC_TiefsetzBereit : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DC_HYB_Auslastungsgrad : 56|8@1+ (0.4,0) [0|100] "Unit_PerCent" Vector__XXX
+ 
 
 BO_ 482 CCP_GE_CR0_01: 8 Gateway_D4C7
  SG_ CCP_GE_CRO_01_Data : 0|64@1+ (1,0) [0|1] ""  Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7
@@ -275,6 +435,9 @@ BO_ 1603 Einheiten_01: 3 Gateway_D4C7
  SG_ KBI_Einheit_Verbrauch : 8|2@1+ (1.0,0.0) [0.0|3] ""  Vector__XXX
  SG_ KBI_Einheit_Volumen : 10|2@1+ (1.0,0.0) [0.0|3] ""  Vector__XXX
  SG_ KBI_Einheit_Sprache : 16|8@1+ (1,0) [0|255] ""  Vector__XXX
+
+BO_ 1627 EM_Hybrid_01: 8 LEH_Hybrid
+ SG_ EM_HYB_KD_Fehler : 15|1@1+ (1,0) [0|1] ""  Gateway
 
 BO_ 260 EPB_01: 8 EPB_D4
  SG_ EPB_01_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
@@ -447,6 +610,20 @@ BO_ 914 ESP_07_FR: 8 Gateway_D4C7
  SG_ ESP_CM_Variante : 60|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ ESP_OBD_Status : 61|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
 
+BO_ 169 ESP_16: 8 Gateway
+ SG_ ESP_16_CRC : 0|8@1+ (1,0) [0|255] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ ESP_16_BZ : 8|4@1+ (1,0) [0|15] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ ESP_Eingriffsmoment : 12|10@1+ (1,-509) [-509|509] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ ESP_Antrieb_Anf : 22|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ESP_Reku_Anf : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ESP_Bremspedalweg : 24|8@1+ (0.4,-0.4) [0|100] "Unit_PerCent" Vector__XXX
+ SG_ ESP_Reku_Index : 32|8@1+ (1,0) [0|255] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ ESP_Reku_Limit : 40|9@1+ (1,-509) [-509|0] "Unit_NewtoMeter" Vector__XXX
+ SG_ ESP_Haltebestaetigung : 60|1@1+ (1,0) [0|1] ""  Motor_MLB_AU64_AU57_Diesel,Motor_MLB_BY_Otto,Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid,Motor_MLB_D4_C7_Otto
+ SG_ ESC_Motorstartverzoegerung : 61|1@1+ (1,0) [0|1] ""  Motor_MLB_AU64_AU57_Diesel,Motor_MLB_BY_Otto,Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid,Motor_MLB_D4_C7_Otto
+ SG_ ESP_KD_OBD_Readiness : 62|1@1+ (1,0) [0|1] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ ESP_KD_OBD_Fehler : 63|1@1+ (1,0) [0|1] ""  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+
 BO_ 1623 ESP_17: 8 ESP_D4
  SG_ ESP_17_CRC : 0|8@1+ (1,0) [0|255] ""  EPB_D4
  SG_ ESP_17_BZ : 8|4@1+ (1,0) [0|15] ""  EPB_D4
@@ -593,6 +770,19 @@ BO_ 1089 Getriebe_04: 8 Getriebe_AL551_951_D4_C7
  SG_ GE_Verlustmoment : 32|8@1+ (1,0) [0|254] ""  EPB_D4,Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ GE_amax_moeglich : 42|9@1+ (0.024,-2.016) [-2.016|10.224] "Unit_MeterPerSeconSquar"  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ GE_Sumpftemperatur : 56|8@1+ (1,-58) [-58|196] "Unit_DegreCelsi"  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
+
+BO_ 1340 HVLM_04: 8 Gateway
+ SG_ HVLM_04_CRC : 0|8@1+ (1,0) [0|255] ""  EPB_MLB
+ SG_ HVLM_04_BZ : 8|4@1+ (1,0) [0|15] ""  EPB_MLB
+ SG_ HVLM_IstModus_02 : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ HVLM_HV_Anf : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ HVLM_Fehlerstatus : 38|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ HVLM_Anforderung_HMS : 41|3@1+ (1,0) [0|7] ""  EPB_MLB
+ SG_ HVLM_Parken_beibehalten_HMS : 44|2@1+ (1,0) [0|3] ""  EPB_MLB
+ SG_ HVLM_Dauer_Klima : 46|5@1+ (1,0) [0|30] "Unit_Minut" Vector__XXX
+ SG_ HVLM_Stecker_Status : 51|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ HVLM_LadeAnforderung : 53|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ HVLM_MaxBatLadestromHV : 56|8@1+ (1,0) [0|253] "Unit_Amper" Vector__XXX
 
 BO_ 294 HCA_01: 8 Frontsensorik
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -749,6 +939,63 @@ BO_ 959 Klima_01: 8 Gateway_D4C7
  SG_ KL_StartStopp_Info : 54|2@1+ (1.0,0.0) [0.0|3] ""  Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
  SG_ KL_el_Zuheizer_Stufe : 56|3@1+ (1.0,0.0) [0.0|7] ""  Motor_EDC17_D4
  SG_ KL_Diag_Absperrvent : 59|4@1+ (1.0,0.0) [0.0|15] ""  Vector__XXX
+
+BO_ 1636 Klima_02: 8 Gateway
+ SG_ KL_Stromsparmodus : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Spg_Hzg_aus : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_AQS_Empfindlichkeit : 2|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_SIH_Soll_li : 8|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_SIH_Takt_li : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_SIL_Soll_li : 12|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_LRH_aus : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_SIH_Soll_re : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_SIH_Takt_re : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_SIL_Soll_re : 20|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_Beschlagsgefahr : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_HSH_ein_Soll : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_HSH_Taktung : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Zuheizer_Freigabe : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_ZHE_Status : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_FSH_Status : 28|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ KL_LRH_on_off : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Umluftklappe_Status : 32|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ KL_Geblaese_Status : 36|4@1+ (1,0) [0|15] ""  BMS_Hybrid
+ SG_ KL_I_Geblaese : 40|8@1+ (0.25,0) [0|63.5] "Unit_Amper" Vector__XXX
+ SG_ KL_Kompressorstrom_soll : 48|10@1+ (1,0) [0|1021] "" Vector__XXX
+ SG_ KL_FSH_P_Soll : 58|6@1+ (20,0) [0|1240] "Unit_Watt" Vector__XXX
+
+BO_ 1646 Klima_03: 7 Gateway
+ SG_ KL_STL_aktiv : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_STH_aktiv : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Solarluefter_aktiv : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Umluft_Taste : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Geblaese_Fond_Status : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ KL_STH_Ansteuerung : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ KL_STH_Betriebsdauer : 10|6@1+ (1,0) [0|60] "Unit_Minut" Vector__XXX
+ SG_ KL_Magnetventil : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_WaPu : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_Freigabe_KRH_li : 18|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_Freigabe_KRH_re : 21|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ KL_BCmE_Livetip_Freigabe : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ KL_HYB_ASV_hinten_schliessen_Anf : 25|1@1+ (1,0) [0|1] ""  BMS_Hybrid
+ SG_ KL_HYB_ASV_vorne_schliessen_Anf : 26|1@1+ (1,0) [0|1] ""  BMS_Hybrid
+ SG_ KL_HYB_Spuelbetrieb_Freigabe : 27|1@1+ (1,0) [0|1] ""  BMS_Hybrid
+ SG_ KL_Fehler_ElWaPu : 28|1@1+ (1,0) [0|1] ""  Motor_MLB_AU64_AU57_Diesel,Motor_MLB_BY_Otto,Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid,Motor_MLB_D4_C7_Otto
+ SG_ KL_Innen_Temp : 32|8@1+ (0.5,-50) [-50|76] "Unit_DegreCelsi"  BMS_Hybrid
+ SG_ KL_Sonnenintensitaet : 40|8@1+ (10,0) [0|1000] "Unit_WattPerMeterSquar" Vector__XXX
+ SG_ KL_AussenTemp_WK : 48|8@1+ (0.5,-50) [-50|76] "Unit_DegreCelsi" Vector__XXX
+
+BO_ 1625 Klimakomp_01: 8 Gateway
+ SG_ EKL_KD_Fehler : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ EKL_Comp_SCI_com_stat : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EKL_Comp_output_stat : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EKL_Comp_main_stat : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ EKL_Comp_ovld_stat : 21|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ EKL_Comp_Inv_stat : 24|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EKL_Comp_photo_temp_stat : 30|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ EKL_Comp_photo_temp : 32|8@1+ (1,0) [0|254] "Unit_DegreCelsi" Vector__XXX
+ SG_ EKL_Comp_current : 40|8@1+ (0.1,0) [0|25.4] "Unit_Amper"  Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid
+ SG_ EKL_Comp_rev_stat : 48|8@1+ (50,0) [0|8600] "Unit_MinutInver" Vector__XXX
 
 BO_ 779 Kombi_01: 8 Gateway_D4C7
  SG_ KBI_ABS_Lampe : 0|1@1+ (1.0,0.0) [0.0|1] ""  Getriebe_AL551_951_D4_C7
@@ -1114,6 +1361,16 @@ BO_ 276 Motor_10: 8 Motor_EDC17_D4
  SG_ MO_rel_Saugrohrdruck_gem_err : 31|1@1+ (1.0,0.0) [0.0|1] ""  Gateway_D4C7
  SG_ MO_BKV_Unterdruck : 32|8@1+ (4,0) [0|1012] "Unit_MilliBar"  Gateway_D4C7
 
+BO_ 168 Motor_12: 8 Motor_MLB_C7_PHEV
+ SG_ Motor_12_CRC : 0|8@1+ (1,0) [0|255] ""  Gateway
+ SG_ Motor_12_BZ : 8|4@1+ (1,0) [0|15] ""  Gateway
+ SG_ MO_Mom_neg_verfuegbar : 12|9@1+ (1,-509) [-509|0] ""  Gateway
+ SG_ MO_Mom_Begr_stat : 21|9@1+ (1,0) [0|509] ""  Gateway
+ SG_ MO_Mom_Begr_dyn : 30|10@1+ (1,-509) [-509|509] ""  Gateway
+ SG_ MO_Momentenintegral_02 : 40|7@1+ (1,0) [0|100] "Unit_PerCent"  Gateway
+ SG_ MO_QBit_Drehzahl_01 : 47|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ MO_Drehzahl_01 : 48|16@1+ (0.25,0) [0|16383] "Unit_MinutInver"  Gateway
+
 BO_ 1648 Motor_18: 8 Motor_EDC17_D4
  SG_ MO_Anzahl_Abgesch_Zyl : 47|3@1+ (1.0,0.0) [0.0|7] ""  Gateway_D4C7,Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7
  SG_ MO_Zylabsch_Texte : 50|2@1+ (1.0,0.0) [0.0|3] ""  Gateway_D4C7
@@ -1129,6 +1386,25 @@ BO_ 1010 Motor_19: 8 Motor_EDC17_D4
  SG_ MO_SCR_Dosierpumpe_Wartezeit : 48|7@1+ (1,0) [0|120] "Unit_Secon"  SCR_C7
  SG_ MO_SCR_Transferpumpe : 55|1@1+ (1.0,0.0) [0.0|1] ""  SCR_C7
  SG_ MO_SCR_Dosierpumpe_Soll : 56|8@1+ (0.4,0) [0.0|100.0] "Unit_PerCent"  SCR_C7
+
+BO_ 815 Motor_23: 8 Motor_MLB_AU64_AU57_Diesel
+ SG_ MO_Antriebsstrang_Warnung_HS : 46|2@1+ (1,0) [0|3] ""  Gateway
+ SG_ MO_Anzeige_Verbrauch : 48|16@1+ (0.005,0) [0|327.675] "Unit_LiterPerHour"  Gateway
+
+BO_ 1391 Motor_25: 8 Motor_MLB_AU64_AU57_Diesel
+ SG_ MO_IstLeistung_EKAT : 41|7@1+ (20,0) [0|2500] "Unit_Watt"  Gateway
+ SG_ MO_HYB_Drehzahl_VM : 48|16@1+ (0.25,0) [0|16256] "Unit_MinutInver"  Gateway,Getriebe_AL551_Hybrid_D4_C7
+
+BO_ 191 Motor_27: 8 Motor_MLB_AU64_AU57_Diesel
+ SG_ Motor_27_CRC : 0|8@1+ (1,0) [0|255] ""  Getriebe_AL551_951_D4_C7,Getriebe_AL551_Hybrid_D4_C7,Getriebe_DL382_MLB,Getriebe_DL501_MLB,Getriebe_VL381_MLB
+ SG_ Motor_27_BZ : 8|4@1+ (1,0) [0|15] ""  Getriebe_AL551_951_D4_C7,Getriebe_AL551_Hybrid_D4_C7,Getriebe_DL382_MLB,Getriebe_DL501_MLB,Getriebe_VL381_MLB
+ SG_ MO_Mom_dyn_Diff : 56|8@1+ (1,-25) [-25|229] "Unit_NewtoMeter"  Getriebe_AL551_951_D4_C7,Getriebe_AL551_Hybrid_D4_C7,Getriebe_DL382_MLB,Getriebe_DL501_MLB,Getriebe_VL381_MLB
+
+BO_ 1014 Motor_30: 8 Motor_MLB_AU64_AU57_Diesel
+ SG_ MO_Tankklappensteuerung : 60|2@1+ (1,0) [0|3] ""  Gateway
+ SG_ MO_Kl_50 : 62|1@1+ (1,0) [0|1] ""  Getriebe_AL551_951_D4_C7
+ SG_ MO_Freigabe_Segeln : 63|1@1+ (1,0) [0|1] ""  Getriebe_AL551_951_D4_C7,Getriebe_DL382_MLB,Getriebe_DL501_MLB
+
 
 BO_ 1601 Motor_Code_01: 8 Motor_EDC17_D4
  SG_ Motor_Code_01_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_D4C7,Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7
@@ -1146,6 +1422,28 @@ BO_ 1601 Motor_Code_01: 8 Motor_EDC17_D4
  SG_ MO_Abgastyp : 57|6@1+ (1.0,0.0) [0.0|63] ""  Gateway_D4C7,Getriebe_AL551_951_D4_C7
  SG_ MO_Einspritzart : 63|1@1+ (1.0,0.0) [0.0|1] ""  Gateway_D4C7
 
+BO_ 305 Motor_Hybrid_03: 8 Motor_MLB_C7_PHEV
+ SG_ MO_ePowermeter : 0|8@1+ (0.4,-0.4) [0|100.8] "Unit_PerCent"  Gateway
+ SG_ MO_Zust_Antrieb : 16|4@1+ (1,0) [0|15] ""  Gateway
+ SG_ MO_Zust_Betriebsstrategie : 20|3@1+ (1,0) [0|7] ""  Gateway
+ SG_ MO_W_Reku_normiert_ueberlauf : 23|1@1+ (1,0) [0|1] ""  Gateway
+ SG_ Ladezustand : 24|8@1+ (1,0) [0|100] "Unit_PerCent"  Gateway
+ SG_ Enrgfluss_State : 32|8@1+ (1,0) [0|255] ""  Gateway
+ SG_ MO_W_Reku_normiert : 40|12@1+ (10,0) [0|40950] "Unit_WattSecond"  Gateway
+ SG_ MO_Powermeter : 52|12@1+ (1,0) [0|4092] ""  Gateway
+
+BO_ 1376 Motor_Hybrid_04: 8 Motor_MLB_C7_PHEV
+ SG_ Motor_Hybrid_04_CRC : 0|8@1+ (1,0) [0|255] ""  Gateway
+ SG_ Motor_Hybrid_04_BZ : 8|4@1+ (1,0) [0|15] ""  Gateway
+ SG_ MO_HV_Spannungsfreiheit : 12|2@1+ (1,0) [0|3] ""  Gateway
+ SG_ MO_Reku_Leistung : 14|10@1+ (10,0) [0|10230] "Unit_Watt"  Gateway
+ SG_ Mo_Powermeter_Grenze : 24|12@1+ (1,0) [0|4092] ""  Gateway
+ SG_ MO_Gesamtst_Spgfreiheit : 36|2@1+ (1,0) [0|3] ""  Gateway
+ SG_ MO_Tankbereitschaft_Status : 38|3@1+ (1,0) [0|7] ""  Gateway
+ SG_ MO_Energieinhalt_BMS : 48|12@1+ (25,0) [0|102325] "Unit_WattHour"  Gateway
+ SG_ MO_HYB_Status_Betriebsstrategie : 60|3@1+ (1,0) [0|7] ""  Gateway
+ SG_ MO_Boost_aktiv : 63|1@1+ (1,0) [0|1] ""  Gateway
+
 BO_ 969 MotorSlave_01: 1 Motor_Slave_D4
  SG_ MOS_KD_Fehler : 0|1@1+ (1.0,0.0) [0.0|1] ""  Gateway_D4C7
 
@@ -1159,6 +1457,54 @@ BO_ 1696 NightVision_01: 8 Gateway_D4C7
  SG_ NV_Akustik_deaktiviert_Icon : 22|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ NV_FGM_deaktiviert_Icon : 23|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ NV_KD_Fehler : 63|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
+
+BO_ 1742 NMH_BMS: 7 BMS_Hybrid
+ SG_ NMH_BMS_Start_1 : 0|1@1+ (1,0) [0|1] ""  BMS_Hybrid,EPB_MLB,Gateway,Getriebe_AL551_951_D4_C7,Getriebe_AL551_Hybrid_D4_C7,Getriebe_DL382_MLB,Getriebe_DL501_MLB,Getriebe_VL381_MLB,LEH_Hybrid,Motor2_MLB_D4_C7,Motor_MLB_AU64_AU57_Diesel,Motor_MLB_BY_Otto,Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid,Motor_MLB_D4_C7_Otto,SCR_MLB
+ SG_ NMH_BMS_Start_2 : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Normal_Mode_1 : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Normal_Mode_2 : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Car_WakeUp : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Per_WakeUp : 8|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ NMH_BMS_Fkt_WakeUp : 13|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ NMH_BMS_Klemme_15 : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Diagnose : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_MindestAktivZeit : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_NL_Daten_EEPROM : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_NL_Luefter : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Signalfehler : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_TimeOut_Fehler : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_CAN_Diag_deaktiv : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_KompSchutz : 35|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Mute_Mode : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Transport_Mode : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Abschaltstufe_aktiv : 38|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Busfehler : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Lokalaktiv : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_BMS_Subsystemaktiv : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1743 NMH_EM: 7 LEH_Hybrid
+ SG_ NMH_EM_Start_1 : 0|1@1+ (1,0) [0|1] ""  BMS_Hybrid,EPB_MLB,Gateway,Getriebe_AL551_951_D4_C7,Getriebe_AL551_Hybrid_D4_C7,Getriebe_DL382_MLB,Getriebe_DL501_MLB,Getriebe_VL381_MLB,LEH_Hybrid,Motor2_MLB_D4_C7,Motor_MLB_AU64_AU57_Diesel,Motor_MLB_BY_Otto,Motor_MLB_C7_PHEV,Motor_MLB_D4_C7_Hybrid,Motor_MLB_D4_C7_Otto,SCR_MLB
+ SG_ NMH_EM_Start_2 : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Normal_Mode_1 : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Normal_Mode_2 : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Car_WakeUp : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Per_WakeUp : 8|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ NMH_EM_Fkt_WakeUp : 13|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ NMH_EM_Klemme_15 : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Diagnose : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_MindestAktivZeit : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_keine_HV_Entl : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_NL_Datem_EEPROM : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Signalfehler : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_TimeOut_Fehler : 33|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_CAN_Diag_deaktiv : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_KompSchutz : 35|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Mute_Mode : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Transport_Mode : 37|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Abschaltstufe_aktiv : 38|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Busfehler : 39|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Lokalaktiv : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ NMH_EM_Subsystemaktiv : 49|1@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 1753 NMH_EPB: 7 EPB_D4
  SG_ NMH_EPB_Start_1 : 0|1@1+ (1.0,0.0) [0.0|1] ""  EPB_D4,Gateway_D4C7,Getriebe_AL551_951_D4_C7,Getriebe_DL501_C7,Getriebe_VL381_C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4,Motor_Slave_D4,SCR_C7
@@ -1659,10 +2005,13 @@ BO_ 266 TSK_01: 8 Motor_MLB_AU48_AU416_Diesel
  SG_ TSK_Status_AB : 16|24@1+ (1,0) [0|16777215] ""  Gateway_B8
  SG_ TSK_amax_moeglich : 48|9@1+ (0.024,-2.016) [-2.016|10.224] "Unit_MeterPerSeconSquar"  Gateway_B8
 
-BO_ 268 TSK_02: 8 XXX
- SG_ TSK_02_CHK : 0|8@1+ (1,0) [0|255] "" XXX
- SG_ COUNTER : 8|4@1+ (1,0) [0|15] "" XXX
- SG_ TSK_Status : 16|2@1+ (1,0) [0|3] "" XXX
+BO_ 268 TSK_02: 8 Motor_MLB_AU48_AU416_Diesel
+ SG_ TSK_02_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_B8,Getriebe_AL551_651_B8,Getriebe_AL551_Q5_Hybrid,Getriebe_SL_LB
+ SG_ TSK_02_BZ : 8|4@1+ (1,0) [0|15] ""  Gateway_B8,Getriebe_AL551_651_B8,Getriebe_AL551_Q5_Hybrid,Getriebe_SL_LB
+ SG_ TSK_Anhalten : 12|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ TSK_Radbremsmom : 40|12@1+ (8,0) [0|32760] "Unit_NewtoMeter"  Gateway_B8
+ SG_ TSK_Standby_Anf_ESP : 52|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ TSK_Verzoeg_Anf : 56|8@1+ (0.024,-3.984) [-3.984|2.112] "Unit_MeterPerSeconSquar"  Gateway_B8
 
 BO_ 786 TSK_03: 8 Motor_EDC17_D4
  SG_ TSK_03_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_D4C7
