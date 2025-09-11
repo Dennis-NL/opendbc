@@ -78,8 +78,6 @@ BO_ 265 ACC_01: 8 Gateway_B8
  SG_ ACC_Anhalten : 57|1@1+ (1,0) [0|1] ""  XXX
  SG_ ACC_Status_ACC : 60|3@1+ (1,0) [0|7] ""  XXX
  SG_ ACC_Minimale_Bremsung : 63|1@1+ (1,0) [0|1] ""  Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
- SG_ NEW_SIGNAL_1 : 15|4@0+ (1,0) [0|15] "" XXX
- SG_ NEW_SIGNAL_2 : 23|2@0+ (1,0) [0|3] "" XXX
 
 BO_ 780 ACC_02: 8 Gateway_D4C7
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  HUD_C7,Kombi_D4
