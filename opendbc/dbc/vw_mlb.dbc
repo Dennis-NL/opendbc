@@ -40,6 +40,31 @@ BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
  SG_ AGA_Verstaerker_Mute : 0|1@1+ (1,0) [0|1] "" Vector__XXX
  SG_ TPS_Airbag_Data : 0|56@1+ (1,0) [0|7.20575940379279E+016] "" Vector__XXX
 
+BO_ 271 ACC_10F: 8 Gateway_B8
+ SG_ CHECKSUM: 0|8@1+ (1,0) [0|255] "" J428
+ SG_ COUNTER: 8|4@1+ (1,0) [0|15] "" J428
+ SG_ Reserved: 12|20@1+ (1,0) [0|1048575] "" Antrieb
+
+BO_ 785 ACC_311: 8 Gateway_B8
+ SG_ CHECKSUM: 0|4@1+ (1,0) [0|15] "" J428
+ SG_ COUNTER: 8|4@1+ (1,0) [0|15] "" J428
+ SG_ ACC_311_Fahren1: 6|2@1+ (1,0) [0|3] "" J428
+ SG_ ACC_311_Meldungen: 16|4@1+ (1,0) [0|15] "" J428
+ SG_ ACC_311_Anzeige: 22|2@1+ (1,0) [0|3] "" J428
+ SG_ ACC_311_Byte3: 0|8@1+ (1,0) [0|255] "" J428
+
+BO_ 1318 ACC_526_Stg: 8 J428
+ SG_ ACC_526_Byte0 : 0|8@1+ (1,0) [0|255] "" J428
+ SG_ ACC_526_Byte1 : 8|8@1+ (1,0) [0|255] "" J428
+ SG_ ACC_temp : 16|8@1+ (0.5,-30) [-30|90] "°C" J428
+ SG_ ACC_526_Byte4 : 24|8@1+ (1,0) [0|255] "" J428
+ SG_ ACC_526_Byte5 : 32|8@1+ (1,0) [0|255] "" J428
+ SG_ ACC_526_Byte6 : 40|8@1+ (1,0) [0|255] "" J428
+
+VAL_ 1318 ACC_526_Byte0 0 "Fernlicht" 1 "Ausschalten" 4 "Stand" 16 "Ueber_60_kmh" 20 "Unter_50_kmh" 128 "Anschalten";
+VAL_ 1318 ACC_526_Byte4 16 "Kein_Objekt" 24 "Objekt_erkannt";
+
+
 BO_ 265 ACC_01: 8 Gateway_B8
  SG_ CHECKSUM : 0|8@1+ (1,0) [0|255] ""  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
  SG_ COUNTER : 8|4@1+ (1,0) [0|15] ""  Magnetic_Ride_LB,Motor_MLB_AU48_AU416_Diesel,Motor_MLB_B8_Q5_Otto,Motor_MLB_Q5_Hybrid
@@ -104,7 +129,6 @@ BO_ 269 ACC_05: 8 Gateway_D4C7
  SG_ ACC_Beeinflussung_ESP : 61|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ ACC_Anhalten : 62|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
  SG_ ACC_KD_Fehler : 63|1@1+ (1.0,0.0) [0.0|1] ""  Vector__XXX
- 
 
 BO_ 64 Airbag_01: 8 Airbag_D4
  SG_ Airbag_01_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_D4C7,Motor_EDC17_D4,Motor_ME17_BY,Motor_MED17_SIMOS8_D4
