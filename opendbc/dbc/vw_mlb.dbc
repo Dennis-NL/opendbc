@@ -2035,6 +2035,7 @@ BO_ 268 TSK_02: 8 Motor_MLB_AU48_AU416_Diesel
  SG_ TSK_02_CHK : 0|8@1+ (1,0) [0|255] ""  Gateway_B8,Getriebe_AL551_651_B8,Getriebe_AL551_Q5_Hybrid,Getriebe_SL_LB
  SG_ TSK_02_BZ : 8|4@1+ (1,0) [0|15] ""  Gateway_B8,Getriebe_AL551_651_B8,Getriebe_AL551_Q5_Hybrid,Getriebe_SL_LB
  SG_ TSK_Anhalten : 12|1@1+ (1,0) [0|1] ""  Gateway_B8
+ SG_ TSK_Status : 16|2@1+ (1,0) [0|3] "" XXX
  SG_ TSK_Radbremsmom : 40|12@1+ (8,0) [0|32760] "Unit_NewtoMeter"  Gateway_B8
  SG_ TSK_Standby_Anf_ESP : 52|1@1+ (1,0) [0|1] ""  Gateway_B8
  SG_ TSK_Verzoeg_Anf : 56|8@1+ (0.024,-3.984) [-3.984|2.112] "Unit_MeterPerSeconSquar"  Gateway_B8
