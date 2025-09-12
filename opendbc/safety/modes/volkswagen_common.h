@@ -18,8 +18,6 @@ bool volkswagen_resume_button_prev = false;
 #define MSG_LH_EPS_03        0x09FU   // RX from EPS, for driver steering torque
 #define MSG_ESP_19           0x0B2U   // RX from ABS, for wheel speeds
 #define MSG_ESP_05           0x106U   // RX from ABS, for brake switch state
-#define MSG_ACC_01           0x109U   // TX by OP, ACC control instructions to the drivetrain coordinator
-#define MSG_ACC_05           0x10DU   // TX by OP, ACC control instructions to the drivetrain coordinator
 #define MSG_TSK_06           0x120U   // RX from ECU, for ACC status from drivetrain coordinator
 #define MSG_MOTOR_20         0x121U   // RX from ECU, for driver throttle input
 #define MSG_ACC_06           0x122U   // TX by OP, ACC control instructions to the drivetrain coordinator
@@ -27,6 +25,7 @@ bool volkswagen_resume_button_prev = false;
 #define MSG_GRA_ACC_01       0x12BU   // TX by OP, ACC control buttons for cancel/resume
 #define MSG_ACC_07           0x12EU   // TX by OP, ACC control instructions to the drivetrain coordinator
 #define MSG_ACC_02           0x30CU   // TX by OP, ACC HUD data to the instrument cluster
+#define MSG_ACC_01           0x109U   // TX by OP, ACC control instructions to the drivetrain coordinator
 #define MSG_LDW_02           0x397U   // TX by OP, Lane line recognition and text alerts
 #define MSG_MOTOR_14         0x3BEU   // RX from ECU, for brake switch status
 
