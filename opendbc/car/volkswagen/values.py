@@ -127,7 +127,7 @@ class CarControllerParams:
           Button(structs.CarState.ButtonEvent.Type.cancel, "LS_01", "LS_Abbrechen", [1]),
           Button(structs.CarState.ButtonEvent.Type.gapAdjustCruise, "LS_01", "LS_Verstellung_Zeitluecke", [1]),
         ]
-        
+
         self.LDW_MESSAGES = {
           "none": 0,                            # Nothing to display
           "laneAssistUnavailChime": 1,          # "Lane Assist currently not available." with chime
@@ -460,7 +460,7 @@ class CAR(Platforms):
   )
   AUDI_Q5_MK1 = VolkswagenMLBPlatformConfig(
     [VWCarDocs("Audi Q5 2008 - 2017")],
-    VolkswagenCarSpecs(mass=1850, wheelbase=2.81),
+    VolkswagenCarSpecs(mass=1850, wheelbase=2.81, minEnableSpeed=20 * CV.KPH_TO_MS),
     chassis_codes={"8R"},
     wmis={WMI.AUDI_EUROPE_MPV, WMI.AUDI_GERMANY_CAR},
   )
