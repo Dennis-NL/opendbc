@@ -145,15 +145,17 @@ class CarController(CarControllerBase):
       # FIXME: Detect clusters with vEgoCluster offsets and apply an identical vCruiseCluster offset
       set_speed = hud_control.setSpeed * CV.MS_TO_KPH
 
-      # MLB:Logic for hud text, bottom acc text display
-      if self.CP.flags & VolkswagenFlags.MLB:
-        if (hud_control.speedVisible and set_speed != self.last_set_speed) or (hud_control.leadVisible and hud_control.leadDistanceBars != self.last_distance):
-          self.texte_timer = self.frame + int(2.0 / DT_CTRL)
-          hudtext = 21 if hud_control.speedVisible else {1: 2, 2: 3, 3: 4, 4: 5}.get(hud_control.leadDistanceBars, 0)
-        elif self.frame < self.texte_timer:
-          hudtext = getattr(self, "hudtext", 0)
-        else:
-          hudtext = 0
+      # MLB: Logic for hud text, bottom acc text display
+      if hud_control.leadDistanceBars != self.last_distance:
+        self.texte_timer = self.frame + int(2.0 / DT_CTRL)
+        hudtext = {1: 2, 2: 3, 3: 4, 4: 5}.get(hud_control.leadDistanceBars, 0)
+      elif set_speed != self.last_set_speed and hud_control.speedVisible:
+        self.texte_timer = self.frame + int(2.0 / DT_CTRL)
+        hudtext = 21
+      elif self.frame < self.texte_timer:
+        hudtext = getattr(self, "hudtext", 0)
+      else:
+        hudtext = 0
 
       self.last_set_speed = set_speed
       self.last_distance = hud_control.leadDistanceBars
