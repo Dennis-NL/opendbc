@@ -460,7 +460,7 @@ class CAR(Platforms):
   )
   AUDI_Q5_MK1 = VolkswagenMLBPlatformConfig(
     [VWCarDocs("Audi Q5 2008 - 2017")],
-    VolkswagenCarSpecs(mass=1850, wheelbase=2.81, minEnableSpeed=20 * CV.KPH_TO_MS),
+    VolkswagenCarSpecs(mass=1850, wheelbase=2.81),
     chassis_codes={"8R"},
     wmis={WMI.AUDI_EUROPE_MPV, WMI.AUDI_GERMANY_CAR},
   )
