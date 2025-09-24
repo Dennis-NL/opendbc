@@ -12,6 +12,7 @@ from opendbc.car.subaru.subarucan import subaru_checksum
 from opendbc.car.chrysler.chryslercan import chrysler_checksum, fca_giorgio_checksum
 from opendbc.car.hyundai.hyundaicanfd import hkg_can_fd_checksum
 from opendbc.car.volkswagen.mqbcan import volkswagen_mqb_meb_checksum, xor_checksum
+from opendbc.car.volkswagen.mlbcan import volkswagen_mlb_checksum
 from opendbc.car.tesla.teslacan import tesla_checksum
 from opendbc.car.body.bodycan import body_checksum
 from opendbc.car.psa.psacan import psa_checksum
@@ -24,13 +25,14 @@ class SignalType:
   TOYOTA_CHECKSUM = 3
   BODY_CHECKSUM = 4
   VOLKSWAGEN_MQB_MEB_CHECKSUM = 5
-  XOR_CHECKSUM = 6
-  SUBARU_CHECKSUM = 7
-  CHRYSLER_CHECKSUM = 8
-  HKG_CAN_FD_CHECKSUM = 9
-  FCA_GIORGIO_CHECKSUM = 10
-  TESLA_CHECKSUM = 11
-  PSA_CHECKSUM = 12
+  VOLKSWAGEN_MLB_CHECKSUM = 6
+  XOR_CHECKSUM = 7
+  SUBARU_CHECKSUM = 8
+  CHRYSLER_CHECKSUM = 9
+  HKG_CAN_FD_CHECKSUM = 10
+  FCA_GIORGIO_CHECKSUM = 11
+  TESLA_CHECKSUM = 12
+  PSA_CHECKSUM = 13
 
 
 @dataclass
@@ -186,6 +188,8 @@ def get_checksum_state(dbc_name: str) -> ChecksumState | None:
     return ChecksumState(16, -1, 0, -1, True, SignalType.HKG_CAN_FD_CHECKSUM, hkg_can_fd_checksum)
   elif dbc_name.startswith(("vw_mqb", "vw_mqbevo", "vw_meb")):
     return ChecksumState(8, 4, 0, 0, True, SignalType.VOLKSWAGEN_MQB_MEB_CHECKSUM, volkswagen_mqb_meb_checksum)
+  elif dbc_name.startswith("vw_mlb"):
+    return ChecksumState(8, 4, 0, 0, True, SignalType.VOLKSWAGEN_MLB_CHECKSUM, volkswagen_mlb_checksum)
   elif dbc_name.startswith("vw_pq"):
     return ChecksumState(8, 4, 0, -1, True, SignalType.XOR_CHECKSUM, xor_checksum)
   elif dbc_name.startswith("subaru_global_"):

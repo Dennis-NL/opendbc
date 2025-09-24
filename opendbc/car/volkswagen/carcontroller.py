@@ -4,7 +4,7 @@ from opendbc.car import Bus, DT_CTRL, structs
 from opendbc.car.lateral import apply_driver_steer_torque_limits
 from opendbc.car.common.conversions import Conversions as CV
 from opendbc.car.interfaces import CarControllerBase
-from opendbc.car.volkswagen import mqbcan, pqcan
+from opendbc.car.volkswagen import mlbcan, mqbcan, pqcan
 from opendbc.car.volkswagen.values import CanBus, CarControllerParams, VolkswagenFlags
 
 VisualAlert = structs.CarControl.HUDControl.VisualAlert
@@ -16,15 +16,31 @@ class CarController(CarControllerBase):
     super().__init__(dbc_names, CP, CP_SP)
     self.CCP = CarControllerParams(CP)
     self.CAN = CanBus(CP)
-    self.CCS = pqcan if CP.flags & VolkswagenFlags.PQ else mqbcan
+    if CP.flags & VolkswagenFlags.PQ:
+      self.CCS = pqcan
+    elif CP.flags & VolkswagenFlags.MLB:
+      self.CCS = mlbcan
+    else:
+      self.CCS = mqbcan
     self.packer_pt = CANPacker(dbc_names[Bus.pt])
     self.aeb_available = not CP.flags & VolkswagenFlags.PQ
 
     self.apply_torque_last = 0
+    self.torque_output_can_last = 0
     self.gra_acc_counter_last = None
+    self.frame = 0
+    self.eps_timer_workaround = CP.flags & VolkswagenFlags.MLB
     self.eps_timer_soft_disable_alert = False
     self.hca_frame_timer_running = 0
+    self.hca_frame_timer_resetting = 0
+    self.hca_frame_low_torque = 0
     self.hca_frame_same_torque = 0
+
+    # MLB hud text
+    self.last_set_speed = 0
+    self.last_distance = 0
+    self.hudtext = 0
+    self.texte_timer = 0
 
   def update(self, CC, CC_SP, CS, now_nanos):
     actuators = CC.actuators
@@ -55,16 +71,34 @@ class CarController(CarControllerBase):
         else:
           self.hca_frame_same_torque = 0
         hca_enabled = abs(apply_torque) > 0
+        if self.eps_timer_workaround and self.hca_frame_timer_running >= self.CCP.STEER_TIME_BM / DT_CTRL:
+          if abs(apply_torque) <= self.CCP.STEER_LOW_TORQUE:
+            self.hca_frame_low_torque += self.CCP.STEER_STEP
+            if self.hca_frame_low_torque >= self.CCP.STEER_TIME_LOW_TORQUE / DT_CTRL:
+              hca_enabled = False
+          else:
+            self.hca_frame_low_torque = 0
+            if self.hca_frame_timer_resetting > 0:
+              apply_torque = 0
       else:
+        self.hca_frame_low_torque = 0
         hca_enabled = False
         apply_torque = 0
 
-      if not hca_enabled:
-        self.hca_frame_timer_running = 0
+      torque_output_can = 0
+      if hca_enabled:
+        torque_output_can = apply_torque
+        self.hca_frame_timer_resetting = 0
+      else:
+        self.hca_frame_timer_resetting += self.CCP.STEER_STEP
+        if self.hca_frame_timer_resetting >= self.CCP.STEER_TIME_RESET / DT_CTRL or not self.eps_timer_workaround:
+          self.hca_frame_timer_running = 0
+          apply_torque = 0
 
       self.eps_timer_soft_disable_alert = self.hca_frame_timer_running > self.CCP.STEER_TIME_ALERT / DT_CTRL
       self.apply_torque_last = apply_torque
-      can_sends.append(self.CCS.create_steering_control(self.packer_pt, self.CAN.pt, apply_torque, hca_enabled))
+      self.torque_output_can_last = torque_output_can
+      can_sends.append(self.CCS.create_steering_control(self.packer_pt, self.CAN.pt, torque_output_can, hca_enabled))
 
       if self.CP.flags & VolkswagenFlags.STOCK_HCA_PRESENT:
         # Pacify VW Emergency Assist driver inactivity detection by changing its view of driver steering input torque
@@ -85,6 +119,7 @@ class CarController(CarControllerBase):
         starting = actuators.longControlState == LongCtrlState.pid and (CS.esp_hold_confirmation or CS.out.vEgo < self.CP.vEgoStopping)
         can_sends.extend(self.CCS.create_acc_accel_control(self.packer_pt, self.CAN.pt, CS.acc_type, CC.longActive, accel,
                                                            acc_control, stopping, starting, CS.esp_hold_confirmation))
+
 
       #if self.aeb_available:
       #  if self.frame % self.CCP.AEB_CONTROL_STEP == 0:
@@ -109,8 +144,24 @@ class CarController(CarControllerBase):
       # FIXME: PQ may need to use the on-the-wire mph/kmh toggle to fix rounding errors
       # FIXME: Detect clusters with vEgoCluster offsets and apply an identical vCruiseCluster offset
       set_speed = hud_control.setSpeed * CV.MS_TO_KPH
+
+      # MLB: Logic for hud text, bottom acc text display
+      if hud_control.leadDistanceBars != self.last_distance:
+        self.texte_timer = self.frame + int(2.0 / DT_CTRL)
+        hudtext = {1: 2, 2: 3, 3: 4, 4: 5}.get(hud_control.leadDistanceBars, 0)
+      elif set_speed != self.last_set_speed and hud_control.speedVisible:
+        self.texte_timer = self.frame + int(2.0 / DT_CTRL)
+        hudtext = 21
+      elif self.frame < self.texte_timer:
+        hudtext = getattr(self, "hudtext", 0)
+      else:
+        hudtext = 0
+
+      self.last_set_speed = set_speed
+      self.last_distance = hud_control.leadDistanceBars
+      self.hudtext = hudtext
       can_sends.append(self.CCS.create_acc_hud_control(self.packer_pt, self.CAN.pt, acc_hud_status, set_speed,
-                                                       lead_distance, hud_control.leadDistanceBars))
+                                                       lead_distance, hud_control.leadDistanceBars, hud_control.speedVisible, hud_control.leadVisible, hud_control.visualAlert, hud_control.audibleAlert, hudtext))
 
     # **** Stock ACC Button Controls **************************************** #
 
@@ -121,7 +172,7 @@ class CarController(CarControllerBase):
 
     new_actuators = actuators.as_builder()
     new_actuators.torque = self.apply_torque_last / self.CCP.STEER_MAX
-    new_actuators.torqueOutputCan = self.apply_torque_last
+    new_actuators.torqueOutputCan = self.torque_output_can_last
 
     self.gra_acc_counter_last = CS.gra_stock_values["COUNTER"]
     self.frame += 1
