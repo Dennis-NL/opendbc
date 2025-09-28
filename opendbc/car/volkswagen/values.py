@@ -448,7 +448,7 @@ class CAR(Platforms):
   )
   AUDI_A4_MK4 = VolkswagenMLBPlatformConfig(
     [VWCarDocs("Audi A4 2007-16")],
-    VolkswagenCarSpecs(mass=1650, wheelbase=2.81, minEnableSpeed=20 * CV.KPH_TO_MS),
+    VolkswagenCarSpecs(mass=1650, wheelbase=2.81),
     chassis_codes={"8K"},
     wmis={WMI.AUDI_GERMANY_CAR},
   )
