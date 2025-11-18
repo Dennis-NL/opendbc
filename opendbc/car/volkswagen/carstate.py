@@ -271,16 +271,19 @@ class CarState(CarStateBase):
       ret.rightBlinker = bool(pt_cp.vl["Gateway_11"]["BH_Blinker_re"])
 
       ret.seatbeltUnlatched = pt_cp.vl["Gateway_06"]["AB_Gurtschloss_FA"] != 3
+      ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
     else:
       ret.leftBlinker = bool(pt_cp.vl["Blinkmodi_01"]["BM_links"])
       ret.rightBlinker = bool(pt_cp.vl["Blinkmodi_01"]["BM_rechts"])
 
       ret.seatbeltUnlatched = pt_cp.vl["Airbag_02"]["AB_Gurtschloss_FA"] != 3
-    
-    #ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
-    #                    pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
-    #                    pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
-    #                    pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
+      #ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
+      #                    pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
+      #                    pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
+      #                    pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
 
     # Consume blind-spot monitoring info/warning LED states, if available.
     # Infostufe: BSM LED on, Warnung: BSM LED flashing
