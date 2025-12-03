@@ -102,9 +102,15 @@ class CarInterface(CarInterfaceBase):
     ret.vEgoStopping = 0.5
     ret.autoResumeSng = ret.minEnableSpeed == -1
 
+    externalPanda = True
+
     CAN = CanBus(fingerprint=fingerprint)
-    if CAN.pt >= 4:
-      safety_configs.insert(0, get_safety_config(structs.CarParams.SafetyModel.noOutput))
+    if externalPanda: # This is the External Red Panda Flag (CAN > 4 = External Panda Bus)
+      # External Panda Bus Numbering:
+      # 4 = Red Panda Bus 0
+      # 5 = Red Panda Bus 1
+      # 6 = Red Panda Bus 2
+      safety_configs.insert(0, get_safety_config(structs.CarParams.SafetyModel.volkswagenMlb)) # Minimal safety mode for external panda with ALC/DSR control
     ret.safetyConfigs = safety_configs
 
     return ret

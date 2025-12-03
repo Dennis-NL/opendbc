@@ -21,30 +21,36 @@ class CanBus(CanBusBase):
   def __init__(self, CP=None, fingerprint=None) -> None:
     super().__init__(CP, fingerprint)
 
-    self._ext = self.offset
+    # Determine if external panda is present (offset >= 4 if 2 panda's are detected)
+    self._has_external_panda = self.offset >= 4
     if CP is not None:
-      self._ext = self.offset + 2 if CP.networkLocation == NetworkLocation.gateway else self.offset
+      self._is_gateway = CP.networkLocation == NetworkLocation.gateway
+    else:
+      self._is_gateway = False
 
   @property
   def pt(self) -> int:
-    # ADAS / Extended CAN, gateway side of the relay
-    return self.offset
+    return 0  # Always Use Comma 3x Internal Panda Bus 0
 
   @property
   def aux(self) -> int:
-    # NetworkLocation.fwdCamera: radar-camera object fusion CAN
-    # NetworkLocation.gateway: powertrain CAN
-    return self.offset + 1
+    return 1  # Always Use Comma 3x Internal Panda Bus 1
 
   @property
   def cam(self) -> int:
-    # ADAS / Extended CAN, camera side of the relay
-    return self.offset + 2
+    return 2  # Always Use Comma 3x Internal Panda Bus 2
 
   @property
   def ext(self) -> int:
-    # ADAS / Extended CAN, side of the relay with the ACC radar
-    return self._ext
+    return 2 if self._is_gateway else 0
+
+  @property
+  def eps(self) -> int:
+    return 4
+
+  @property
+  def car(self) -> int:
+    return 6
 
 
 class CarControllerParams:
