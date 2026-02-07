@@ -245,7 +245,11 @@ class CarState(CarStateBase):
     )
 
     ret.gasPressed = pt_cp.vl["Motor_03"]["MO_Fahrpedalrohwert_01"] > 0
-    ret.gearShifter = self.parse_gear_shifter(self.CCP.shifter_values.get(pt_cp.vl["Getriebe_03"]["GE_Waehlhebel"], None))
+    if self.CP.carFingerprint == CAR.PORSCHE_MACAN_MK1:
+      ret.gearShifter = self.parse_gear_shifter(self.CCP.shifter_values.get(pt_cp.vl["Getriebe_03"]["GE_Waehlhebel"], None))
+    else:
+      ret.gearShifter = GearShifter.drive
+
 
     # ACC okay but disabled (1), ACC ready (2), a radar visibility or other fault/disruption (6 or 7)
     # currently regulating speed (3), driver accel override (4), brake only (5)
@@ -271,15 +275,17 @@ class CarState(CarStateBase):
     if self.CP.carFingerprint == CAR.PORSCHE_MACAN_MK1:
       ret.leftBlinker = bool(pt_cp.vl["Gateway_11"]["BH_Blinker_li"])
       ret.rightBlinker = bool(pt_cp.vl["Gateway_11"]["BH_Blinker_re"])
+
+      ret.seatbeltUnlatched = pt_cp.vl["Gateway_06"]["AB_Gurtschloss_FA"] != 3
+      ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
+                          pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
     else:
       ret.leftBlinker = bool(pt_cp.vl["Blinkmodi_01"]["BM_links"])
       ret.rightBlinker = bool(pt_cp.vl["Blinkmodi_01"]["BM_rechts"])
 
-    ret.seatbeltUnlatched = pt_cp.vl["Gateway_06"]["AB_Gurtschloss_FA"] != 3
-    ret.doorOpen = any([pt_cp.vl["Gateway_05"]["FT_Tuer_geoeffnet"],
-                        pt_cp.vl["Gateway_05"]["BT_Tuer_geoeffnet"],
-                        pt_cp.vl["Gateway_05"]["HL_Tuer_geoeffnet"],
-                        pt_cp.vl["Gateway_05"]["HR_Tuer_geoeffnet"]])
+      ret.seatbeltUnlatched = pt_cp.vl["Airbag_02"]["AB_Gurtschloss_FA"] != 3
 
     # Consume blind-spot monitoring info/warning LED states, if available.
     # Infostufe: BSM LED on, Warnung: BSM LED flashing
