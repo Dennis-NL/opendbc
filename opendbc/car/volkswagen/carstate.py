@@ -52,7 +52,7 @@ class CarState(CarStateBase):
     if self.CP.flags & VolkswagenFlags.PQ:
       return self.update_pq(pt_cp, cam_cp, ext_cp)
     elif self.CP.flags & VolkswagenFlags.MLB:
-      return self.update_mlb(pt_cp, cam_cp, ext_cp)
+      return self.update_mlb(pt_cp, cam_cp, ext_cp, alt_cp)
 
     ret = structs.CarState()
     ret_sp = structs.CarStateSP()
@@ -234,7 +234,7 @@ class CarState(CarStateBase):
     self.frame += 1
     return ret, ret_sp
 
-  def update_mlb(self, pt_cp, cam_cp, ext_cp) -> structs.CarState:
+  def update_mlb(self, pt_cp, cam_cp, ext_cp, alt_cp) -> structs.CarState:
     ret = structs.CarState()
     ret_sp = structs.CarStateSP()
 
