@@ -266,7 +266,7 @@
     "year": [
       "2017"
     ],
-    "package": "Adaptive Cruise Control (ACC)"
+    "package": "No Adaptive Cruise Control (Non-ACC)"
   },
   "Chevrolet Bolt EV Non-ACC 2018-21": {
     "platform": "CHEVROLET_BOLT_NON_ACC_1ST_GEN",
@@ -279,7 +279,7 @@
       "2020",
       "2021"
     ],
-    "package": "Adaptive Cruise Control (ACC)"
+    "package": "No Adaptive Cruise Control (Non-ACC)"
   },
   "Chevrolet Equinox 2019-22": {
     "platform": "CHEVROLET_EQUINOX",
@@ -293,6 +293,19 @@
       "2022"
     ],
     "package": "Adaptive Cruise Control (ACC)"
+  },
+  "Chevrolet Equinox Non-ACC 2019-22": {
+    "platform": "CHEVROLET_EQUINOX_NON_ACC_3RD_GEN",
+    "make": "Chevrolet",
+    "brand": "gm",
+    "model": "Equinox Non-ACC",
+    "year": [
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+    ],
+    "package": "No Adaptive Cruise Control (Non-ACC)"
   },
   "Chevrolet Malibu Non-ACC 2016-23": {
     "platform": "CHEVROLET_MALIBU_NON_ACC_9TH_GEN",
@@ -309,7 +322,7 @@
       "2022",
       "2023"
     ],
-    "package": "Adaptive Cruise Control (ACC)"
+    "package": "No Adaptive Cruise Control (Non-ACC)"
   },
   "Chevrolet Silverado 1500 2020-21": {
     "platform": "CHEVROLET_SILVERADO",
@@ -3182,6 +3195,16 @@
     "year": [
       "2024",
       "2025"
+    ],
+    "package": "All"
+  },
+  "Tesla Model X (with HW4) 2024": {
+    "platform": "TESLA_MODEL_X",
+    "make": "Tesla",
+    "brand": "tesla",
+    "model": "Model X (with HW4)",
+    "year": [
+      "2024"
     ],
     "package": "All"
   },
