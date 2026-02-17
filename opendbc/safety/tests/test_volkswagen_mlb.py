@@ -58,6 +58,13 @@ class TestVolkswagenMlbSafetyBase(common.CarSafetyTest, common.DriverTorqueSteer
   def _pcm_status_msg(self, enable):
     return self._tsk_status_msg(enable)
 
+  def _tsk_02_status_msg(self, status):
+    values = {"TSK_Status": status}
+    return self.packer.make_can_msg_safety("TSK_02", 2, values)
+
+  def _pcm_status_msg_tsk_02(self, status):
+    return self._tsk_02_status_msg(status)
+
   # Driver steering input torque
   def _torque_driver_msg(self, torque):
     values = {"EPS_Lenkmoment": abs(torque), "EPS_VZ_Lenkmoment": torque < 0}
@@ -132,6 +139,7 @@ class TestVolkswagenMlbStockSafety(TestVolkswagenMlbSafetyBase):
   def test_cancel_button(self):
     # Disable on rising edge of cancel button
     self._rx(self._tsk_status_msg(False, main_switch=True))
+    self._rx(self._tsk_02_status_msg(0))
     self.safety.set_controls_allowed(1)
     self._rx(self._ls_01_msg(cancel=True, bus=0))
     self.assertFalse(self.safety.get_controls_allowed(), "controls allowed after cancel")
