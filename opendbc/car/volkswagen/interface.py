@@ -88,7 +88,7 @@ class CarInterface(CarInterfaceBase):
 
     # Per-vehicle overrides
 
-    if candidate == CAR.PORSCHE_MACAN_MK1:
+    if candidate in (CAR.PORSCHE_MACAN_MK1, CAR.AUDI_Q5_MK1):
       ret.steerActuatorDelay = 0.07
 
     ret.pcmCruise = not ret.openpilotLongitudinalControl
