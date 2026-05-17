@@ -52,24 +52,14 @@ class CarController(CarControllerBase):
     self.gra_acc_counter_last = None
     self.hca_mitigation = HCAMitigation(self.CCP)
 
-    # EPS timer reset workaround for MLB platforms (Porsche Macan, Audi, etc.)
-    # MQB racks reset the timer after a single frame of HCA disabled.
-    # MLB racks need > 1 second to reset; we try to reset when
-    # engaged for a long time and torque output is currently low.
-    self.eps_timer_workaround = bool(CP.flags & VolkswagenFlags.MLB)
-    self.hca_frame_timer_resetting = 0
-    self.hca_frame_low_torque = 0
-
   def update(self, CC, CS, now_nanos):
     actuators = CC.actuators
     hud_control = CC.hudControl
     can_sends = []
-    output_torque = 0
 
     # **** Steering Controls ************************************************ #
 
     if self.frame % self.CCP.STEER_STEP == 0:
-<<<<<<< HEAD
       apply_torque = 0
       if CC.latActive:
         new_torque = int(round(actuators.torque * self.CCP.STEER_MAX))
@@ -77,63 +67,8 @@ class CarController(CarControllerBase):
 
       apply_torque = self.hca_mitigation.update(apply_torque, self.apply_torque_last)
       hca_enabled = apply_torque != 0
-=======
-      # Logic to avoid HCA state 4 "refused":
-      #   * Don't steer unless HCA is in state 3 "ready" or 5 "active"
-      #   * Don't steer at standstill
-      #   * Don't send > 3.00 Newton-meters torque
-      #   * Don't send the same torque for > 6 seconds
-      #   * Don't send uninterrupted steering for > 360 seconds
-      # MQB racks reset the uninterrupted steering timer after a single frame
-      # of HCA disabled; this is done whenever output happens to be zero.
-      # MLB racks need > 1 second to reset; try to reset if engaged for a long
-      # time and torque output is currently low. Resets are aborted early if
-      # torque demand rises. Long resets, completed or not, need apply_torque
-      # reset to 0 on exit due to rate limit safety.
-
-      if CC.latActive:
-        new_torque = int(round(actuators.torque * self.CCP.STEER_MAX))
-        apply_torque = apply_driver_steer_torque_limits(new_torque, self.apply_torque_last, CS.out.steeringTorque, self.CCP)
-        self.hca_frame_timer_running += self.CCP.STEER_STEP
-        if self.apply_torque_last == apply_torque:
-          self.hca_frame_same_torque += self.CCP.STEER_STEP
-          if self.hca_frame_same_torque > self.CCP.STEER_TIME_STUCK_TORQUE / DT_CTRL:
-            apply_torque -= (1, -1)[apply_torque < 0]
-            self.hca_frame_same_torque = 0
-        else:
-          self.hca_frame_same_torque = 0
-        hca_enabled = abs(apply_torque) > 0
-
-        # EPS timer reset workaround for MLB platforms
-        if self.eps_timer_workaround and self.hca_frame_timer_running >= self.CCP.STEER_TIME_BM / DT_CTRL:
-          if abs(apply_torque) <= self.CCP.STEER_LOW_TORQUE:
-            self.hca_frame_low_torque += self.CCP.STEER_STEP
-            if self.hca_frame_low_torque >= self.CCP.STEER_TIME_LOW_TORQUE / DT_CTRL:
-              hca_enabled = False
-          else:
-            self.hca_frame_low_torque = 0
-            if self.hca_frame_timer_resetting > 0:
-              # Reset aborted early due to torque demand rising — zero apply_torque for rate limit safety
-              apply_torque = 0
-      else:
-        self.hca_frame_low_torque = 0
-        hca_enabled = False
-        apply_torque = 0
-
-      if hca_enabled:
-        output_torque = apply_torque
-        self.hca_frame_timer_resetting = 0
-      else:
-        output_torque = 0
-        self.hca_frame_timer_resetting += self.CCP.STEER_STEP
-        if self.hca_frame_timer_resetting >= self.CCP.STEER_TIME_RESET / DT_CTRL or not self.eps_timer_workaround:
-          self.hca_frame_timer_running = 0
-          apply_torque = 0
-
-      self.eps_timer_soft_disable_alert = self.hca_frame_timer_running > self.CCP.STEER_TIME_ALERT / DT_CTRL
->>>>>>> 266126018 (MLB: Steering timeout bomb workaround)
       self.apply_torque_last = apply_torque
-      can_sends.append(self.CCS.create_steering_control(self.packer_pt, self.CAN.pt, output_torque, hca_enabled))
+      can_sends.append(self.CCS.create_steering_control(self.packer_pt, self.CAN.pt, apply_torque, hca_enabled))
 
       if self.CP.flags & VolkswagenFlags.STOCK_HCA_PRESENT:
         # Pacify VW Emergency Assist driver inactivity detection by changing its view of driver steering input torque
@@ -189,7 +124,7 @@ class CarController(CarControllerBase):
                                                            cancel=CC.cruiseControl.cancel, resume=CC.cruiseControl.resume))
 
     new_actuators = actuators.as_builder()
-    new_actuators.torque = output_torque / self.CCP.STEER_MAX
+    new_actuators.torque = self.apply_torque_last / self.CCP.STEER_MAX
     new_actuators.torqueOutputCan = self.apply_torque_last
 
     self.gra_acc_counter_last = CS.gra_stock_values["COUNTER"]
